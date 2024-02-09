@@ -1,4 +1,3 @@
-import {DaoSortBy} from '@aragon/sdk-client';
 import {
   ButtonGroup,
   ButtonText,
@@ -13,23 +12,20 @@ import {generatePath, useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 
 import {DaoCard} from 'components/daoCard';
-import {useFavoritedDaosInfiniteQuery} from 'hooks/useFavoritedDaos';
 import {
   AugmentedDaoListItem,
   ExploreFilter,
   EXPLORE_FILTER,
   useDaosInfiniteQuery,
 } from 'hooks/useDaos';
-import {PluginTypes} from 'hooks/usePluginClient';
 import {useWallet} from 'hooks/useWallet';
 import {getSupportedNetworkByChainId, SupportedChainID} from 'utils/constants';
-import {toDisplayEns} from 'utils/library';
 import {Dashboard} from 'utils/paths';
 
 export function isExploreFilter(
   filterValue: string
 ): filterValue is ExploreFilter {
-  return EXPLORE_FILTER.some(ef => ef === filterValue);
+  return EXPLORE_FILTER.some((ef: any) => ef === filterValue);
 }
 
 export const DaoExplorer = () => {
@@ -40,25 +36,17 @@ export const DaoExplorer = () => {
   const [filterValue, setFilterValue] = useState<ExploreFilter>('favorite');
 
   // conditional api queries
-  const fetchFavorited = filterValue === 'favorite';
-  const favoritedApi = useFavoritedDaosInfiniteQuery(fetchFavorited);
-  const daosApi = useDaosInfiniteQuery(fetchFavorited === false, {
-    sortBy: toDaoSortBy(filterValue),
-  });
+  const daosApi = useDaosInfiniteQuery(true, {});
 
   // resulting api response
   const exploreDaosApi = useMemo(
-    () =>
-      (fetchFavorited ? favoritedApi : daosApi) as UseInfiniteQueryResult<
-        AugmentedDaoListItem,
-        unknown
-      >,
-    [daosApi, favoritedApi, fetchFavorited]
+    () => daosApi as UseInfiniteQueryResult<AugmentedDaoListItem, unknown>,
+    [daosApi]
   );
 
   // whether the connected wallet has favorited DAOS
   const loggedInAndHasFavoritedDaos =
-    isConnected && (favoritedApi.data?.pages || []).length > 0;
+    isConnected && (daosApi.data?.pages || []).length > 0;
 
   /*************************************************
    *             Callbacks and Handlers            *
@@ -81,15 +69,6 @@ export const DaoExplorer = () => {
   /*************************************************
    *                      Effects                  *
    *************************************************/
-  useEffect(() => {
-    if (
-      favoritedApi.status === 'success' &&
-      loggedInAndHasFavoritedDaos === false
-    ) {
-      setFilterValue('newest');
-    }
-  }, [favoritedApi.status, loggedInAndHasFavoritedDaos]);
-
   /*************************************************
    *                     Render                    *
    *************************************************/
@@ -98,20 +77,6 @@ export const DaoExplorer = () => {
       <MainContainer>
         <HeaderWrapper>
           <Title>{t('explore.explorer.title')}</Title>
-          {loggedInAndHasFavoritedDaos && (
-            <ButtonGroupContainer>
-              <ButtonGroup
-                defaultValue={filterValue}
-                onChange={handleFilterChange}
-                bgWhite={false}
-              >
-                <Option label={t('explore.explorer.myDaos')} value="favorite" />
-
-                {/* <Option label={t('explore.explorer.popular')} value="popular" /> */}
-                <Option label={t('explore.explorer.newest')} value="newest" />
-              </ButtonGroup>
-            </ButtonGroupContainer>
-          )}
         </HeaderWrapper>
         <CardsWrapper>
           {exploreDaosApi.isLoading ? (
@@ -119,23 +84,13 @@ export const DaoExplorer = () => {
           ) : (
             exploreDaosApi.data?.pages?.map(dao => (
               <DaoCard
-                key={dao.address}
-                name={dao.metadata.name}
-                ensName={toDisplayEns(dao.ensDomain)}
-                logo={dao.metadata.avatar}
-                description={dao.metadata.description}
+                key={dao.wallet}
+                name={dao.name}
+                address={dao.wallet}
+                description={dao.description}
                 chainId={dao.chain}
                 onClick={() =>
-                  handleDaoClicked(
-                    toDisplayEns(dao.ensDomain) || dao.address,
-                    dao.chain
-                  )
-                }
-                daoType={
-                  (dao?.plugins?.[0]?.id as PluginTypes) ===
-                  'token-voting.plugin.dao.eth'
-                    ? 'token-based'
-                    : 'wallet-based'
+                  handleDaoClicked(dao.wallet, dao.chain as SupportedChainID)
                 }
               />
             ))
@@ -162,20 +117,6 @@ export const DaoExplorer = () => {
     </Container>
   );
 };
-
-/**
- * Map explore filter to SDK DAO sort by
- * @param filter selected DAO category
- * @returns the equivalent of the SDK enum
- */
-function toDaoSortBy(filter: ExploreFilter) {
-  switch (filter) {
-    case 'newest':
-      return DaoSortBy.CREATED_AT;
-    default:
-      return DaoSortBy.CREATED_AT;
-  }
-}
 
 const ButtonGroupContainer = styled.div.attrs({
   className: 'flex',

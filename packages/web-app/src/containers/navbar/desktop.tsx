@@ -1,4 +1,3 @@
-import {useReactiveVar} from '@apollo/client';
 import {
   Breadcrumb,
   ButtonText,
@@ -10,11 +9,9 @@ import {useTranslation} from 'react-i18next';
 import {generatePath, useNavigate, useParams} from 'react-router-dom';
 import styled from 'styled-components';
 
-import {DaoSelector} from 'components/daoSelector';
 import {Container} from 'components/layout';
 import NavLinks from 'components/navLinks';
 import ExitProcessMenu, {ProcessType} from 'containers/exitProcessMenu';
-import {selectedDaoVar} from 'context/apolloClient';
 import {useNetwork} from 'context/network';
 import {useMappedBreadcrumbs} from 'hooks/useMappedBreadcrumbs';
 import {useWallet} from 'hooks/useWallet';
@@ -39,9 +36,7 @@ const DesktopNav: React.FC<DesktopNavProp> = props => {
   const {network} = useNetwork();
   const {dao} = useParams();
   const {breadcrumbs, icon, tag} = useMappedBreadcrumbs();
-  const {address, ensName, ensAvatarUrl, isConnected} = useWallet();
-
-  const currentDao = useReactiveVar(selectedDaoVar);
+  const {address, isConnected} = useWallet();
 
   const [showExitProcessMenu, setShowExitProcessMenu] = useState(false);
 
@@ -73,12 +68,10 @@ const DesktopNav: React.FC<DesktopNavProp> = props => {
             />
 
             <ButtonWallet
-              src={ensAvatarUrl || address}
+              src={address}
               onClick={props.onWalletClick}
               isConnected={isConnected}
-              label={
-                isConnected ? ensName || address : t('navButtons.connectWallet')
-              }
+              label={isConnected ? address : t('navButtons.connectWallet')}
             />
           </Menu>
         </Container>
@@ -99,12 +92,6 @@ const DesktopNav: React.FC<DesktopNavProp> = props => {
       <NetworkIndicator />
       <Menu>
         <Content>
-          <DaoSelector
-            daoAddress={currentDao.ensDomain}
-            daoName={currentDao?.metadata?.name || currentDao?.ensDomain}
-            src={currentDao.metadata.avatar}
-            onClick={props.onDaoSelect}
-          />
           <LinksWrapper>
             {breadcrumbs.length < MIN_ROUTE_DEPTH_FOR_BREADCRUMBS ? (
               <NavLinks />
@@ -133,12 +120,10 @@ const DesktopNav: React.FC<DesktopNavProp> = props => {
           />
 
           <ButtonWallet
-            src={ensAvatarUrl || address}
+            src={address}
             onClick={props.onWalletClick}
             isConnected={isConnected}
-            label={
-              isConnected ? ensName || address : t('navButtons.connectWallet')
-            }
+            label={isConnected ? address : t('navButtons.connectWallet')}
           />
         </div>
       </Menu>

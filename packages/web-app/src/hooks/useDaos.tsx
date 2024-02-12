@@ -7,6 +7,7 @@ import {
 import {InfiniteData, useInfiniteQuery} from '@tanstack/react-query';
 
 import {useClient} from './useClient';
+import {useAccount} from 'wagmi';
 
 export const EXPLORE_FILTER = ['favorite', 'newest', 'popular'] as const;
 export type ExploreFilter = typeof EXPLORE_FILTER[number];
@@ -50,6 +51,8 @@ export const useDaosInfiniteQuery = (
   }: Partial<Pick<QueryOption, 'direction' | 'limit'>> = {}
 ) => {
   const {client} = useClient();
+  const {address} = useAccount();
+  console.log(`address: ${address}`);
 
   return useInfiniteQuery({
     // notice the use of `clientNetwork` instead of `network` from network context

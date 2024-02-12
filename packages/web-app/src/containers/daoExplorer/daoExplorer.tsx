@@ -21,6 +21,8 @@ import {
 import {useWallet} from 'hooks/useWallet';
 import {getSupportedNetworkByChainId, SupportedChainID} from 'utils/constants';
 import {Dashboard} from 'utils/paths';
+import {useAccount, useNetwork as useWagmiNetwork} from 'wagmi';
+import {useNetwork} from '../../context/network';
 
 export function isExploreFilter(
   filterValue: string
@@ -31,7 +33,7 @@ export function isExploreFilter(
 export const DaoExplorer = () => {
   const {t} = useTranslation();
   const navigate = useNavigate();
-  const {isConnected} = useWallet();
+  const {methods, isConnected} = useWallet();
 
   const [filterValue, setFilterValue] = useState<ExploreFilter>('favorite');
 
@@ -65,6 +67,23 @@ export const DaoExplorer = () => {
       })
     );
   };
+
+  // Note: The wallet network determines the expected network when entering
+  // the flow so that the process is more convenient for already logged in
+  // users and so that the process doesn't start with a warning. Afterwards,
+  // the select blockchain form dictates the expected network
+  useEffect(() => {
+    if (!isConnected) {
+      methods
+        .selectWallet()
+        .then(() => {})
+        .catch((err: Error) => {
+          // To be implemented: maybe add an error message when
+          // the error is different from closing the window
+          console.error(err);
+        });
+    }
+  }, [isConnected, methods]);
 
   /*************************************************
    *                      Effects                  *

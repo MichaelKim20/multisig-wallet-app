@@ -2,7 +2,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 
 import useScreen from '../../hooks/useScreen';
-import {AvatarDao} from '../avatar';
 import {ButtonIcon, ButtonText} from '../button';
 import {Dropdown} from '../dropdown';
 import {
@@ -22,13 +21,10 @@ const DEFAULT_LINKS_SHOWN = 3;
 
 export type HeaderDaoProps = {
   daoName: string;
-  daoEnsName: string;
-  daoAvatar?: string;
   daoUrl: string;
   description: string;
   created_at: string;
   daoChain: string;
-  daoType: string;
   favorited?: boolean;
   links?: Array<{
     label: string;
@@ -48,13 +44,10 @@ type DescriptionProps = {
 
 export const HeaderDao: React.FC<HeaderDaoProps> = ({
   daoName,
-  daoEnsName,
-  daoAvatar,
   daoUrl,
   description,
   created_at,
   daoChain,
-  daoType,
   favorited = false,
   links = [],
   translation,
@@ -101,9 +94,7 @@ export const HeaderDao: React.FC<HeaderDaoProps> = ({
       <ContentWrapper>
         <Content>
           <Title>{daoName}</Title>
-          <p className="mt-0.25 desktop:mt-0.5 font-semibold text-ui-500">
-            {daoEnsName}
-          </p>
+          <p className="mt-0.25 desktop:mt-0.5 font-semibold text-ui-500"></p>
           <Link
             label={daoUrl}
             iconRight={<IconCopy />}
@@ -127,14 +118,14 @@ export const HeaderDao: React.FC<HeaderDaoProps> = ({
             )}
           </div>
         </Content>
-        <AvatarContainer>
-          <AvatarDao
-            daoName={daoName || ''}
-            size="unset"
-            className="w-10 desktop:w-14 h-10 desktop:h-14 text-lg desktop:text-xl"
-            {...(daoAvatar && {src: daoAvatar})}
-          />
-        </AvatarContainer>
+        {/*<AvatarContainer>*/}
+        {/*  <AvatarDao*/}
+        {/*    daoName={daoName || ''}*/}
+        {/*    size="unset"*/}
+        {/*    className="w-10 desktop:w-14 h-10 desktop:h-14 text-lg desktop:text-xl"*/}
+        {/*    {...(daoAvatar && {src: daoAvatar})}*/}
+        {/*  />*/}
+        {/*</AvatarContainer>*/}
       </ContentWrapper>
       <DetailsWrapper>
         <NetworkDetailsContainer>
@@ -145,10 +136,6 @@ export const HeaderDao: React.FC<HeaderDaoProps> = ({
           <NetworkDetails>
             <IconBlock className="text-primary-400" />
             <DetailsText className="capitalize">{daoChain}</DetailsText>
-          </NetworkDetails>
-          <NetworkDetails>
-            <IconCommunity className="text-primary-400" />
-            <DetailsText>{daoType}</DetailsText>
           </NetworkDetails>
         </NetworkDetailsContainer>
         <ActionWrapper>
@@ -215,9 +202,9 @@ const Content = styled.div.attrs({
   className: 'col-span-10',
 })``;
 
-const AvatarContainer = styled.div.attrs({
-  className: 'tablet:flex hidden justify-end col-span-2 desktop:items-center',
-})``;
+// const AvatarContainer = styled.div.attrs({
+//   className: 'tablet:flex hidden justify-end col-span-2 desktop:items-center',
+// })``;
 
 const Title = styled.h1.attrs({
   className: 'ft-text-3xl font-bold text-ui-800',

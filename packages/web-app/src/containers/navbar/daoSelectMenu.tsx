@@ -21,7 +21,6 @@ import {useGlobalModalContext} from 'context/globalModals';
 import useScreen from 'hooks/useScreen';
 import {getSupportedNetworkByChainId} from 'utils/constants';
 import {Dashboard} from 'utils/paths';
-import {toDisplayEns} from 'utils/library';
 
 const DaoSelectMenu: React.FC = () => {
   const {t} = useTranslation();
@@ -33,11 +32,12 @@ const DaoSelectMenu: React.FC = () => {
 
   const handleDaoSelect = useCallback(
     (dao: NavigationDao) => {
+      console.log('handleDaoSelect');
       selectedDaoVar(dao);
       navigate(
         generatePath(Dashboard, {
           network: getSupportedNetworkByChainId(dao.chain),
-          dao: toDisplayEns(dao.ensDomain) || dao.address,
+          dao: dao.address,
         })
       );
       close('selectDao');
@@ -54,7 +54,7 @@ const DaoSelectMenu: React.FC = () => {
     <ModalBottomSheetSwitcher
       isOpen={isSelectDaoOpen}
       onClose={() => close('selectDao')}
-      onOpenAutoFocus={e => e.preventDefault()}
+      onOpenAutoFocus={(e: any) => e.preventDefault()}
     >
       <div className="flex flex-col h-full" style={{maxHeight: '75vh'}}>
         <ModalHeader>
@@ -72,9 +72,8 @@ const DaoSelectMenu: React.FC = () => {
           <ListGroup>
             <ListItemDao
               selected
-              daoAddress={toDisplayEns(currentDao?.ensDomain)}
+              daoAddress={currentDao?.address}
               daoName={currentDao?.metadata.name}
-              daoLogo={currentDao?.metadata.avatar}
               onClick={() => close('selectDao')}
             />
             {favoriteDaoCache.flatMap(dao => {
@@ -87,9 +86,8 @@ const DaoSelectMenu: React.FC = () => {
                 return (
                   <ListItemDao
                     key={dao.address}
-                    daoAddress={toDisplayEns(dao.ensDomain)}
+                    daoAddress={dao.address}
                     daoName={dao.metadata.name}
-                    daoLogo={dao.metadata.avatar}
                     onClick={() => handleDaoSelect(dao)}
                   />
                 );

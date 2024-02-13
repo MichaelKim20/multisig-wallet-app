@@ -1,15 +1,13 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useMemo} from 'react';
 import {matchRoutes, useLocation} from 'react-router-dom';
 import styled from 'styled-components';
 
 import {ProcessType} from 'containers/exitProcessMenu';
-import {selectedDaoVar} from 'context/apolloClient';
 import {useGlobalModalContext} from 'context/globalModals';
 import {useNetwork} from 'context/network';
 import {usePrivacyContext} from 'context/privacyContext';
-import {useDaoDetailsQuery} from 'hooks/useDaoDetails';
 import useScreen from 'hooks/useScreen';
-import {CHAIN_METADATA, FEEDBACK_FORM} from 'utils/constants';
+import {FEEDBACK_FORM} from 'utils/constants';
 import {
   Community,
   CreateDAO,
@@ -35,28 +33,10 @@ const Navbar: React.FC = () => {
   const {network} = useNetwork();
   const {handleWithFunctionalPreferenceMenu} = usePrivacyContext();
 
-  const {data: daoDetails} = useDaoDetailsQuery();
-
   const processInfo = useMemo(() => {
     const matches = matchRoutes(processPaths, pathname);
     if (matches) return getProcessInfo(matches[0].route.path) as ProcessInfo;
   }, [pathname]);
-
-  // set current dao as selected dao
-  useEffect(() => {
-    if (daoDetails) {
-      selectedDaoVar({
-        address: daoDetails.address,
-        ensDomain: daoDetails.ensDomain,
-        metadata: {
-          name: daoDetails.metadata.name,
-          avatar: daoDetails.metadata.avatar,
-        },
-        chain: CHAIN_METADATA[network].id,
-        plugins: daoDetails.plugins,
-      });
-    }
-  }, [daoDetails, network]);
 
   /*************************************************
    *                   Handlers                    *
@@ -82,7 +62,6 @@ const Navbar: React.FC = () => {
         processType={processInfo?.processType}
         onDaoSelect={handleOnDaoSelect}
         onWalletClick={handleWalletButtonClick}
-        onFeedbackClick={handleFeedbackButtonClick}
       />
     );
   }
@@ -91,7 +70,6 @@ const Navbar: React.FC = () => {
       isProcess={processInfo?.isProcess}
       onDaoSelect={handleOnDaoSelect}
       onWalletClick={handleWalletButtonClick}
-      onFeedbackClick={handleFeedbackButtonClick}
     />
   );
 };

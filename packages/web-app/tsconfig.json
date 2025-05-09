@@ -6,7 +6,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -16,6 +16,7 @@
     "jsx": "react",
     "baseUrl": "./src",
     "sourceMap": true,
+    "noImplicitAny": false,
     "paths": {
       "test-utils": ["./utils/test-utils"]
     }

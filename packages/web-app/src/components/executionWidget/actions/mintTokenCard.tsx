@@ -21,10 +21,7 @@ export const MintTokenCard: React.FC<{
 
   const {
     data: {members},
-  } = useDaoMembers(
-    daoDetails?.plugins[0].instanceAddress as string,
-    daoDetails?.plugins[0].id as PluginTypes
-  );
+  } = useDaoMembers(daoDetails?.address || '', 'multisig.plugin.dao.eth');
 
   const newTotalSupply = action.summary.newTokens + action.summary.tokenSupply;
 

@@ -67,10 +67,10 @@ const ProposalList: React.FC<ProposalListProps> = ({
     pluginType
   );
 
-  const mappedProposals: ({id: string} & CardProposalProps)[] = useMemo(
+  const mappedProposals = useMemo(
     () =>
-      proposals.map(p =>
-        proposal2CardProps(
+      proposals.map(p => ({
+        ...proposal2CardProps(
           p,
           members.members.length,
           network,
@@ -78,8 +78,9 @@ const ProposalList: React.FC<ProposalListProps> = ({
           t,
           daoAddressOrEns,
           address
-        )
-      ),
+        ),
+        addressLabel: shortenAddress(p.creator),
+      })),
     [
       proposals,
       members.members.length,

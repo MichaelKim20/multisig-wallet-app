@@ -127,23 +127,15 @@ const ConfigureWithdrawForm: React.FC<ConfigureWithdrawFormProps> = ({
           getTokenInfo(tokenAddress, provider, nativeCurrency),
         ]);
 
-        const [balance, apiData, chainData] = await allTokenInfoPromise;
-        if (apiData) {
-          setValue(`actions.${actionIndex}.tokenName`, apiData.name);
-          setValue(`actions.${actionIndex}.tokenSymbol`, apiData.symbol);
-          setValue(`actions.${actionIndex}.tokenImgUrl`, apiData.imgUrl);
-          setValue(`actions.${actionIndex}.tokenPrice`, apiData.price);
-        }
-
-        if (!apiData && chainData) {
+        const [balance, chainData] = await allTokenInfoPromise;
+        if (chainData) {
           setValue(`actions.${actionIndex}.tokenName`, chainData.name);
           setValue(`actions.${actionIndex}.tokenSymbol`, chainData.symbol);
+          setValue(
+            `actions.${actionIndex}.tokenDecimals`,
+            Number(chainData.decimals)
+          );
         }
-
-        setValue(
-          `actions.${actionIndex}.tokenDecimals`,
-          Number(chainData.decimals)
-        );
         setValue(`actions.${actionIndex}.tokenBalance`, balance);
       } catch (error) {
         /**
@@ -293,15 +285,13 @@ const ConfigureWithdrawForm: React.FC<ConfigureWithdrawFormProps> = ({
       const recipient = new Web3Address(provider, value.address, value.ensName);
 
       // withdrawing to DAO
-      if (
-        recipient.address === daoDetails?.address ||
-        recipient.ensName === toDisplayEns(daoDetails?.ensDomain)
-      )
+      if (recipient.address === daoDetails?.address) {
         return 'Cant withdraw to your own address';
+      }
 
       return validateWeb3Address(recipient, t('errors.required.recipient'), t);
     },
-    [daoDetails?.address, daoDetails?.ensDomain, provider, t]
+    [daoDetails?.address, provider, t]
   );
 
   /*************************************************
@@ -326,7 +316,7 @@ const ConfigureWithdrawForm: React.FC<ConfigureWithdrawFormProps> = ({
           }) => (
             <WrappedWalletInput
               name={name}
-              state={error && 'critical'}
+              state={error ? 'critical' : 'success'}
               value={value}
               onBlur={onBlur}
               onChange={onChange}

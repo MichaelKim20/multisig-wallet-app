@@ -66,6 +66,7 @@ const AddLinks: React.FC<AddLinks> = ({
         mode={bgWhite ? 'ghost' : 'secondary'}
         size="large"
         onClick={handleAddLink}
+        css={{}}
         {...(buttonPlusIcon ? {iconLeft: <IconAdd />} : {})}
       />
     </Container>

@@ -84,7 +84,7 @@ const ProposalTransactionProvider: React.FC<Props> = ({children}) => {
   const {pluginAddress, pluginType} = useMemo(() => {
     return {
       pluginAddress: daoDetails?.address || '',
-      pluginType: 'multisig.plugin.dao.eth',
+      pluginType: 'multisig.plugin.dao.eth' as PluginTypes,
     };
   }, [daoDetails]);
   const {client} = useClient();

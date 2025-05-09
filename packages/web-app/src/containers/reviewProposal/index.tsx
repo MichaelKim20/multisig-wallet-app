@@ -354,7 +354,9 @@ function getReviewProposalTerminalProps(
   // totalSupply: bigint | undefined
 ) {
   return {
-    minApproval: daoSettings?.minApprovals,
+    minApproval: isMultisigVotingSettings(daoSettings)
+      ? daoSettings.minApprovals
+      : undefined,
     strategy: t('votingTerminal.multisig'),
     voteOptions: t('votingTerminal.approve'),
     approvals: [],

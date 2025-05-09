@@ -10,6 +10,8 @@ export type ButtonBaseProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   label?: string;
   mode?: 'primary' | 'secondary' | 'ghost';
   size?: 'small' | 'medium' | 'large';
+  css?: any;
+  className?: string;
 };
 
 /**
@@ -22,11 +24,26 @@ export type ButtonBaseProps = ButtonHTMLAttributes<HTMLButtonElement> & {
  */
 export const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonBaseProps>(
   (
-    {iconRight, iconLeft, iconOnly = false, size = 'medium', label, ...props},
+    {
+      iconRight,
+      iconLeft,
+      iconOnly = false,
+      size = 'medium',
+      label,
+      className,
+      css = {},
+      ...props
+    },
     ref
   ) => {
     return (
-      <BaseStyledButton {...props} size={size} ref={ref}>
+      <BaseStyledButton
+        {...props}
+        size={size}
+        ref={ref}
+        css={css}
+        className={className}
+      >
         {iconLeft && <IconContainer size={size}>{iconLeft}</IconContainer>}
         {!iconOnly && (
           <Label visible={label ? true : false}>{label && label}</Label>

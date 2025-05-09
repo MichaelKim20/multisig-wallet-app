@@ -1,10 +1,13 @@
-import {AlertCard, Label} from '@aragon/ui-components';
+import {
+  AlertCard,
+  Label,
+  FormlessComponentForType,
+} from '@aragon/ui-components';
 import React, {useMemo} from 'react';
 import {useTranslation} from 'react-i18next';
 import styled from 'styled-components';
 
 import {AccordionMethod, AccordionMethodType} from 'components/accordionMethod';
-import {FormlessComponentForType} from 'containers/smartContractComposer/components/inputForm';
 import {POTENTIALLY_TIME_SENSITIVE_FIELDS} from 'utils/constants/misc';
 import {capitalizeFirstLetter, shortenAddress} from 'utils/library';
 import {ActionWC, Input} from 'utils/types';

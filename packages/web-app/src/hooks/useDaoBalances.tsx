@@ -10,7 +10,7 @@ import {AssetBalance} from '../utils/aragon/sdk-client-types';
 import loadedTokensMeta from '../../data/tokens.json';
 
 export const useLoadTokenLogoURL = (): {getImgUrl: any; tokenList: any} => {
-  const [tokenList, setTokenList] = useState({});
+  const [tokenList, setTokenList] = useState({tokens: []});
   useEffect(() => {
     // async function loadTokens() {
     //   // const loadedTokensMeta = await fetch('/data/tokens.json') // 파일 경로를 지정합니다.
@@ -102,6 +102,7 @@ export const useDaoBalances = (
                 false
               );
               return {
+                id: contractAddress,
                 address: contractAddress,
                 name,
                 symbol,

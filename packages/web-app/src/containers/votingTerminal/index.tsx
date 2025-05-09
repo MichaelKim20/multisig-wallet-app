@@ -288,9 +288,9 @@ type StatusProp = {
 };
 
 const StatusIcon: React.FC<StatusProp> = ({status}) => {
-  if (status === 'Pending' || status === 'Active') {
+  if (status === ProposalStatus.ACTIVE) {
     return <IconClock className="text-info-500" />;
-  } else if (status === 'Defeated') {
+  } else if (status === ProposalStatus.EXECUTED) {
     return <IconRadioCancel className="text-critical-500" />;
   } else {
     return <IconInfo className="text-info-500" />;

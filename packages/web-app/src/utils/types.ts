@@ -215,7 +215,8 @@ export type ActionsTypes =
   | 'modify_token_voting_settings'
   | 'modify_metadata'
   | 'modify_multisig_voting_settings'
-  | 'update_minimum_approval';
+  | 'update_minimum_approval'
+  | 'modify_voting_settings';
 
 export type ActionWithdraw = {
   amount: number;
@@ -312,6 +313,40 @@ export type ActionWC = Omit<ActionSCC, 'name'> & {
   raw?: any;
 };
 
+export type ActionUpdateMetadata = {
+  name: 'modify_metadata';
+  inputs: {
+    name: string;
+    description: string;
+    avatar?: string | Blob;
+    links: Array<{name: string; url: string}>;
+  };
+};
+
+export type ActionUpdateMultisigPluginSettings = {
+  name: 'modify_multisig_voting_settings';
+  inputs: {
+    minApprovals: number;
+    onlyListed: boolean;
+  };
+};
+
+export type ActionUpdatePluginSettings = {
+  name: 'modify_voting_settings';
+  inputs: {
+    votingMode: number;
+    supportThreshold: number;
+    minParticipation: number;
+    minDuration: number;
+    minProposerVotingPower: number;
+    totalVotingWeight: bigint;
+    token?: {
+      decimals: number;
+      symbol: string;
+    };
+  };
+};
+
 // TODO: Consider making this a generic type that take other types of the form
 // like ActionAddAddress (or more generically, ActionItem...?) instead taking the
 // union of those subtypes. [VR 11-08-2022]
@@ -322,7 +357,10 @@ export type Action =
   | ActionMintToken
   | ActionUpdateMinimumApproval
   | ActionSCC
-  | ActionWC;
+  | ActionWC
+  | ActionUpdateMetadata
+  | ActionUpdateMultisigPluginSettings
+  | ActionUpdatePluginSettings;
 
 export type ParamType = {
   type: string;

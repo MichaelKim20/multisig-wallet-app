@@ -22,7 +22,6 @@
 // } from '@aragon/sdk-client';
 // import {ProposalMetadata, ProposalStatus} from '@aragon/sdk-client-common';
 import {ModeType, ProgressStatusProps, VoterType} from '@aragon/ui-components';
-// import Big from 'big.js';
 import {format, formatDistanceToNow, Locale} from 'date-fns';
 import differenceInSeconds from 'date-fns/fp/differenceInSeconds';
 import * as Locales from 'date-fns/locale';
@@ -40,6 +39,9 @@ import {
   ProposalMetadata,
   ProposalStatus,
 } from 'utils/aragon/types';
+import {formatUnits} from 'ethers/lib/utils';
+import Big from 'big.js';
+import {abbreviateTokenAmount} from 'utils/tokens';
 
 // import {ProposalVoteResults} from 'containers/votingTerminal';
 // import {
@@ -117,26 +119,26 @@ export function isMultisigProposal(
   return 'approvals' in proposal;
 }
 //
-// /**
-//  * Get formatted minimum participation for an ERC20 proposal
-//  * @param minParticipation minimum number of tokens needed to participate in vote
-//  * @param totalVotingWeight total number of tokens able to vote
-//  * @param tokenDecimals proposal token decimals
-//  * @returns
-//  */
-// export function getErc20MinParticipation(
-//   minParticipation: number,
-//   totalVotingWeight: bigint,
-//   tokenDecimals: number
-// ) {
-//   return abbreviateTokenAmount(
-//     parseFloat(
-//       Big(formatUnits(totalVotingWeight, tokenDecimals))
-//         .mul(minParticipation)
-//         .toFixed(2)
-//     ).toString()
-//   );
-// }
+/**
+ * Get formatted minimum participation for an ERC20 proposal
+ * @param minParticipation minimum number of tokens needed to participate in vote
+ * @param totalVotingWeight total number of tokens able to vote
+ * @param tokenDecimals proposal token decimals
+ * @returns
+ */
+export function getErc20MinParticipation(
+  minParticipation: number,
+  totalVotingWeight: bigint,
+  tokenDecimals: number
+) {
+  return abbreviateTokenAmount(
+    parseFloat(
+      Big(formatUnits(totalVotingWeight, tokenDecimals))
+        .mul(minParticipation)
+        .toFixed(2)
+    ).toString()
+  );
+}
 //
 // export function getErc20VotingParticipation(
 //   minParticipation: number,

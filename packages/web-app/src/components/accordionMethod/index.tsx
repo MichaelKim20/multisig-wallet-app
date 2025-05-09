@@ -99,6 +99,7 @@ export const AccordionItem: React.FC<AccordionMethodType & {name: string}> = ({
                     mode="ghost"
                     size="medium"
                     icon={<IconMenuVertical />}
+                    css={{}}
                   />
                 }
               />
@@ -108,6 +109,7 @@ export const AccordionItem: React.FC<AccordionMethodType & {name: string}> = ({
                 mode={type === 'action-builder' ? 'ghost' : 'secondary'}
                 size="medium"
                 icon={<IconChevronDown />}
+                css={{}}
               />
             </Accordion.Trigger>
           </VStack>

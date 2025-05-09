@@ -33,6 +33,13 @@
     tslib "^2.3.0"
     zen-observable-ts "^1.2.0"
 
+"@aragon/osx-commons-configs@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@aragon/osx-commons-configs/-/osx-commons-configs-0.6.0.tgz#8c1198e0d2d8cdf8b021ae4709a79955a936ab70"
+  integrity sha512-wypaD0epzD+IY0GmgvYlYgJzJuvxkFW+L0nH6e1tzA1jsvgnxfln0Tk4q86xBp6sfuoybh5atKziQyXbRGLHKA==
+  dependencies:
+    tslib "^2.6.2"
+
 "@aragon/osx-ethers-v1.0.0@npm:@aragon/osx-ethers@1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@aragon/osx-ethers/-/osx-ethers-1.2.1.tgz#a442048137153ed5a3ca4eff3f3927b45a5134b5"
@@ -55,10 +62,11 @@
     ethers "^5.6.2"
 
 "@aragon/sdk-client-common@^1.2.0-rc0":
-  version "1.14.1"
-  resolved "https://registry.yarnpkg.com/@aragon/sdk-client-common/-/sdk-client-common-1.14.1.tgz#75f2b8341170c98ef8b83a8a6f9cad1ea9d96db8"
-  integrity sha512-ySJ6Mgr/7/LzIzyLpWi/1RODPiHsgz5EhQyBi3u3GGJ2mcZIRPlturcDjjGnv8mO1hqNWEdjPuuX95RWnW/kKQ==
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/@aragon/sdk-client-common/-/sdk-client-common-1.17.0.tgz#0709ef8f368a17a172d8899b78c557c570571758"
+  integrity sha512-YZkIyI3LSyQ/Z9iV1O8gdMGHUuM36Vt6Gsc7cSurnhCE+csV1Boir4pseV+0HJStO12/e6a4EW9x1i625TY+iA==
   dependencies:
+    "@aragon/osx-commons-configs" "^0.6.0"
     "@aragon/osx-ethers" "^1.3.1"
     "@aragon/osx-ethers-v1.0.0" "npm:@aragon/osx-ethers@1.2.1"
     "@aragon/sdk-ipfs" "^1.1.0"
@@ -20080,10 +20088,10 @@ multihashes@^0.4.15, multihashes@~0.4.15:
     multibase "^0.7.0"
     varint "^5.0.0"
 
-multisig-wallet-contracts-lib@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/multisig-wallet-contracts-lib/-/multisig-wallet-contracts-lib-2.0.3.tgz#c6144ab0151bc9a64e428730efee6275c965168e"
-  integrity sha512-WXB/SoTM7Z7+TjwABJxyTbunrCa1sga9464fQYTIvvi4LkUnJ11vim7Lro6KrJsB9WujjwzeN8HIQiSk47pxkA==
+multisig-wallet-contracts-lib@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/multisig-wallet-contracts-lib/-/multisig-wallet-contracts-lib-2.0.4.tgz#9709f2220cca1d206036c7a4a550864280f139aa"
+  integrity sha512-8Db/IytGKYqMO92+1G619LFroEyB7ywJdIu2B7Iqr52tymAjulzOM29gPh1rtrmhhtKwDxkaAgI2Z1EsEi/1Pg==
   dependencies:
     ethers "^5.7.0"
 
@@ -26173,6 +26181,11 @@ tslib@^2.0.0, tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.3
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
+
+tslib@^2.6.2:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
+  integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
 
 tsutils@^3.17.1, tsutils@^3.21.0:
   version "3.21.0"

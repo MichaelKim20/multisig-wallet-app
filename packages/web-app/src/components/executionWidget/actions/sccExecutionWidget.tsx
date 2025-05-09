@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {AccordionMethod} from 'components/accordionMethod';
-import {ComponentForTypeWithFormProvider} from 'containers/smartContractComposer/components/inputForm';
 import React from 'react';
 import styled from 'styled-components';
 import {Input} from 'utils/types';
@@ -26,13 +25,6 @@ export const SCCExecutionCard: React.FC<{
                     ({input.type})
                   </span>
                 </div>
-                <ComponentForTypeWithFormProvider
-                  key={input.name}
-                  input={input}
-                  functionName={action.functionName}
-                  disabled
-                  defaultValue={input.value}
-                />
               </div>
             ))}
           </div>

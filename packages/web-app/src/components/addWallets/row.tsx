@@ -160,7 +160,7 @@ const WalletRow: React.FC<WalletRowProps> = ({index, onDelete}) => {
               <Label label={t('labels.whitelistWallets.address')} />
             </LabelWrapper>
             <WrappedWalletInput
-              state={error && 'critical'}
+              state={error ? 'critical' : 'success'}
               value={value}
               onBlur={onBlur}
               onChange={e => handleOnChange(e, onChange)}

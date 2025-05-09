@@ -71,7 +71,7 @@ export const ModifyMvSettingsCard: React.FC<{
         <Dl>
           <Dt>{t('labels.earlyExecution')}</Dt>
           <Dd>
-            {inputs.votingMode === VotingMode.EARLY_EXECUTION
+            {Number(inputs.votingMode) === VotingMode.EARLY_EXECUTION
               ? t('labels.yes')
               : t('labels.no')}
           </Dd>

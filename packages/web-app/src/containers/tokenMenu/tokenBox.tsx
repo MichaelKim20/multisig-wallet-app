@@ -46,6 +46,5 @@ const Name = styled.span.attrs({
 })``;
 
 const Price = styled.span.attrs({
-  className:
-    'ft-text-base font-normal flex-none w-1/3 text-ui-500 text-right truncate',
+  className: 'ft-text-base font-normal flex-none text-ui-500 text-right',
 })``;

@@ -69,10 +69,10 @@ const DepositModal: React.FC = () => {
     navigate(
       generatePath(AllTransfers, {
         network,
-        dao: toDisplayEns(daoDetails?.ensDomain) || daoDetails?.address,
+        dao: daoDetails?.address,
       })
     );
-  }, [close, daoDetails?.address, daoDetails?.ensDomain, navigate, network]);
+  }, [close, daoDetails?.address, navigate, network]);
 
   // close modal and initiate the login/wrong network flow
   const handleConnectClick = useCallback(() => {
@@ -119,9 +119,7 @@ const DepositModal: React.FC = () => {
           <Subtitle>{t('modal.deposit.inputHelptextEns')}</Subtitle>
           <WrappedWalletInput
             value={{
-              ensName: networkSupportsENS
-                ? toDisplayEns(daoDetails.ensDomain)
-                : '',
+              ensName: '',
               address: daoDetails.address,
             }}
             onChange={() => {}}

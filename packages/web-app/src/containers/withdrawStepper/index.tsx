@@ -55,7 +55,7 @@ const WithdrawStepper: React.FC<WithdrawStepperProps> = ({
         processType="ProposalCreation"
         returnPath={generatePath(Finance, {
           network,
-          dao: toDisplayEns(daoDetails?.ensDomain) || daoDetails?.address,
+          dao: daoDetails?.address,
         })}
       >
         <Step

@@ -139,7 +139,7 @@ const CreateProposalProvider: React.FC<Props> = ({
         proposalCreationData.title,
         proposalCreationData.description,
         proposalCreationData.destination,
-        proposalCreationData.value
+        ethers.BigNumber.from(proposalCreationData.value)
       );
     }
 
@@ -149,7 +149,7 @@ const CreateProposalProvider: React.FC<Props> = ({
       proposalCreationData.description,
       proposalCreationData.tokenAddress,
       proposalCreationData.destination,
-      proposalCreationData.value
+      ethers.BigNumber.from(proposalCreationData.value)
     );
   }, [client, proposalCreationData]);
 
@@ -261,14 +261,14 @@ const CreateProposalProvider: React.FC<Props> = ({
           proposalCreationData.title,
           proposalCreationData.description,
           proposalCreationData.destination,
-          proposalCreationData.value
+          ethers.BigNumber.from(proposalCreationData.value)
         )
       : client?.multiSigWallet.submitTransactionTokenTransfer(
           proposalCreationData.title,
           proposalCreationData.description,
           proposalCreationData.tokenAddress,
           proposalCreationData.destination,
-          proposalCreationData.value
+          ethers.BigNumber.from(proposalCreationData.value)
         );
 
     if (creationProcessState === TransactionState.SUCCESS) {

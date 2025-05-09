@@ -73,7 +73,7 @@ export const Row = ({index, ...props}: MultisigWalletsRowProps) => {
           <Container>
             <InputContainer>
               <WrappedWalletInput
-                state={error && 'critical'}
+                state={error ? 'critical' : 'success'}
                 value={value}
                 onBlur={onBlur}
                 onChange={onChange}

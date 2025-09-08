@@ -201,6 +201,7 @@ export type ActionsTypes =
   | 'add_address'
   | 'remove_address'
   | 'withdraw_assets'
+  | 'modify_multisig_voting_settings'
 
 export type ActionWithdraw = {
   amount: number;

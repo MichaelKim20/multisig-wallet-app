@@ -1,4 +1,3 @@
-// import {MultisigVotingSettings, VotingSettings} from '@aragon/sdk-client';
 import {useEffect, useState} from 'react';
 import {HookData, SupportedVotingSettings} from 'utils/types';
 import {

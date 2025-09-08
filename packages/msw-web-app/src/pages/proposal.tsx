@@ -563,7 +563,7 @@ const Proposal: React.FC = () => {
             actions={decodedActions}
             status={executionStatus}
             onExecuteClicked={handleExecuteNowClicked}
-            txhash={transactionHash || proposal?.executionTxHash || undefined}
+            txhash={transactionHash ||  undefined}
           />
         </ProposalContainer>
         <AdditionalInfoContainer>

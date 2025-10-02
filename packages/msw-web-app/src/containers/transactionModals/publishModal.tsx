@@ -1,10 +1,5 @@
 import React, {useMemo} from 'react';
-import {
-  AlertInline,
-  ButtonText,
-  IconReload,
-  Spinner,
-} from 'msw-ui-components';
+import {AlertInline, ButtonText, IconReload, Spinner} from 'msw-ui-components';
 import styled from 'styled-components';
 import {useTranslation} from 'react-i18next';
 
@@ -97,7 +92,7 @@ const PublishModal: React.FC<PublishModalProps> = ({
   return (
     <ModalBottomSheetSwitcher
       {...{isOpen, onClose, closeOnDrag}}
-      title={title || t('createDAO.review.title')}
+      title={title || t('createMSWallet.review.title')}
       subtitle={subtitle}
     >
       <GasCostTableContainer>

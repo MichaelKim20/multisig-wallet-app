@@ -33,7 +33,7 @@ const DefineMetadata: React.FC<DefineMetadataProps> = () => {
       <FormItem>
         <Label
           label={t('labels.walletName')}
-          helpText={t('createDAO.step2.nameSubtitle')}
+          helpText={t('createMSWallet.step2.nameSubtitle')}
         />
 
         <Controller
@@ -65,7 +65,7 @@ const DefineMetadata: React.FC<DefineMetadataProps> = () => {
       <FormItem>
         <Label
           label={t('labels.description')}
-          helpText={t('createDAO.step2.descriptionSubtitle')}
+          helpText={t('createMSWallet.step2.descriptionSubtitle')}
         />
         <Controller
           name="walletSummary"
@@ -79,7 +79,7 @@ const DefineMetadata: React.FC<DefineMetadataProps> = () => {
             <>
               <TextareaSimple
                 {...field}
-                placeholder={t('placeHolders.daoDescription')}
+                placeholder={t('placeHolders.msWalletDescription')}
               />
               {error?.message && (
                 <AlertInline label={error.message} mode="critical" />

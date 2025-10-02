@@ -82,7 +82,7 @@ export const MultisigMinimumApproval = () => {
     <>
       <Label
         label={t('labels.minimumApproval')}
-        helpText={t('createDAO.step4.minimumApprovalSubtitle')}
+        helpText={t('createMSWallet.step4.minimumApprovalSubtitle')}
       />
       <Controller
         name="multisigMinimumApprovals"
@@ -124,15 +124,15 @@ export function generateAlert(
 
   // minority can pass proposal (0-50%)
   if (value <= max / 2 && value > 0)
-    return {label: t('createDAO.step4.alerts.minority'), mode: 'warning'};
+    return {label: t('createMSWallet.step4.alerts.minority'), mode: 'warning'};
 
   // majority to pass proposal (50% +1 -> 75%)
   if (value > 0 && value < max * 0.75)
-    return {label: t('createDAO.step4.alerts.majority'), mode: 'success'};
+    return {label: t('createMSWallet.step4.alerts.majority'), mode: 'success'};
 
   // absolute majority
   return {
-    label: t('createDAO.step4.alerts.absoluteMajority'),
+    label: t('createMSWallet.step4.alerts.absoluteMajority'),
     mode: 'warning',
   };
 }

@@ -92,8 +92,8 @@ export const MultisigWallets = () => {
     <Container>
       <DescriptionContainer>
         <Label
-          label={t('createDAO.step3.multisigMembers')}
-          helpText={t('createDAO.step3.multisigMembersHelptext')}
+          label={t('createMSWallet.step3.multisigMembers')}
+          helpText={t('createMSWallet.step3.multisigMembersHelptext')}
           renderHtml
         />
       </DescriptionContainer>
@@ -171,7 +171,7 @@ export const MultisigWallets = () => {
         </SummaryContainer>
       </TableContainer>
       <AlertInline
-        label={t('createDAO.step3.multisigMembersWalletAlert')}
+        label={t('createMSWallet.step3.multisigMembersWalletAlert')}
         mode="neutral"
       />
     </Container>

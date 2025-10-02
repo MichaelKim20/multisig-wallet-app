@@ -6,7 +6,6 @@ import {HashRouter as Router} from 'react-router-dom';
 import 'tailwindcss/tailwind.css';
 
 import {AlertProvider} from 'context/alert';
-// import {APMProvider} from 'context/elasticAPM';
 import {GlobalModalsProvider} from 'context/globalModals';
 import {NetworkProvider} from 'context/network';
 import {PrivacyContextProvider} from 'context/privacyContext';

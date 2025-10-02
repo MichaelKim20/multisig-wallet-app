@@ -1,0 +1,663 @@
+{
+  "menu": "메뉴",
+  "navLinks": {
+    "dashboard": "대시보드",
+    "governance": "제안서",
+    "finance": "자금",
+    "community": "구성원",
+    "settings": "설정",
+    "exploreLinkLabel": "탐색",
+    "exploreLinkURL": "/",
+    "learnLinkLabel": "학습",
+    "learnLinkURL": "https://aragon.org/education-portal",
+    "buildLinkLabel": "구축",
+    "buildLinkURL": "https://devs.aragon.org/",
+    "helpLinkLabel": "도움말",
+    "helpLinkURL": "https://discord.gg/AhzsGmh7fK",
+    "termsLinkLabel": "서비스 약관",
+    "termsLinkURL": "https://aragon.org/terms-and-conditions",
+    "privacyLinkLabel": "개인정보보호",
+    "privacyLinkURL": "https://aragon.org/privacy-policy"
+  },
+  "chainNames": {
+    "ethereum": "이더리움",
+    "sepolia": "이더리움 세폴리아",
+    "bosagora_mainnet": "BOSagora 메인넷",
+    "bosagora_testnet": "BOSagora 테스트넷",
+    "msw_devnet": "다중서명 지갑 개발넷",
+    "unsupported": "지원되지 않음"
+  },
+  "walletSwitcher": {
+    "title": "다중서명 지갑 선택",
+    "subtitle": "탐색 페이지로 돌아가기"
+  },
+  "navButtons": {
+    "connectWallet": "지갑 연결"
+  },
+  "labels": {
+    "members": "구성원",
+    "addMember": "구성원 추가",
+    "manageMember": "구성원 관리",
+    "addedMembers": "추가된 구성원",
+    "addWallets": "지갑 추가",
+    "removedMembers": "제거된 구성원",
+    "totalWallets": "총 지갑 수",
+    "seeCommunity": "커뮤니티 보기",
+    "viewTransactions": "거래 내역 보기",
+    "seeAll": "모두 보기",
+    "to": "받는 사람",
+    "recipient": "수신자",
+    "from": "보낸 사람",
+    "token": "토큰",
+    "amount": "금액",
+    "address": "토큰 계약 주소",
+    "clear": "지우기",
+    "copy": "복사",
+    "paste": "붙여넣기",
+    "max": "최대",
+    "back": "뒤로",
+    "next": "다음",
+    "resources": "리소스",
+    "days": "일",
+    "dateTime": "특정 날짜 및 시간",
+    "resourcesHelptext": "여기에 외부 리소스를 공유하세요.",
+    "addLink": "링크 추가",
+    "addWallet": "지갑 추가",
+    "removeLink": "링크 제거",
+    "removeWallet": "이 주소 삭제",
+    "resetDistribution": "토큰 배포 재설정",
+    "deleteAllAddresses": "모든 주소 삭제",
+    "addResource": "리소스 추가",
+    "link": "링크",
+    "label": "이름 / 설명",
+    "multisigMembers": "다중서명 구성원",
+    "duration": "기간",
+    "duplicateAction": "액션 복제",
+    "resetAction": "액션 재설정",
+    "removeEntireAction": "전체 액션 제거",
+    "treasuryValue": "지갑의 자산",
+    "searchPlaceholder": "검색하려면 입력하세요...",
+    "result": "1 result",
+    "noResults": "표시할 결과 없음",
+    "noResultsSubtitle": "해당하는 지갑을 찾기 위해 검색을 수정해 보세요.",
+    "whitelistWallets": {
+      "addAddress": "주소 추가",
+      "uploadCSV": "CSV 업로드",
+      "addresses": "주소",
+      "address": "주소",
+      "deleteAllEntries": "모든 주소 삭제",
+      "resetAllEntries": "모든 주소 재설정",
+      "resetEntry": "주소 재설정",
+      "deleteEntry": "주소 제거",
+      "totalWallets": "총 지갑 수"
+    },
+    "review": {
+      "blockchain": "블록체인",
+      "voters": "투표자",
+      "votingParameters": "투표 매개변수",
+      "governance": "거버넌스",
+      "network": "네트워크",
+      "eligibleVoters": "투표 자격자",
+      "distribution": "배포",
+      "msWalletMetadata": "다중서명 지갑 메타데이터",
+      "multisigMinimumApprovals": "out of {{count}} addresses",
+      "distributionLink": "배포 링크"
+    },
+    "msWalletSettings": "다중서명 지갑 설정",
+    "msWalletTreasury": "다중서명 지갑 자금고",
+    "author": "작성자",
+    "edit": "편집",
+    "selectWallets": "지갑 선택",
+    "cancel": "취소",
+    "addSingleWallet": "지갑 1개 추가",
+    "singleAddressSelected": "1 address selected",
+    "noAddressSelected": "선택된 주소 없음",
+    "noResources": "추가된 리소스 없음",
+    "signVote": "투표 서명",
+    "signExecuteProposal": "제안서 실행",
+    "aragonOSx": "Aragon OSx",
+    "disconnectWallet": "지갑 연결 해제",
+    "submitProposal": "제안서 게시",
+    "addWalletsDescription": "지갑은 제안서를 생성하고, 자금고로 자금을 입출금하는 제안서를 만들며, 다중서명 지갑에서 투표할 수 있습니다.",
+    "addNWallets": "지갑 {{walletCount}}개 추가",
+    "nAddressesSelected": "{{count}} addresses selected",
+    "maxBalance": "최대 잔액",
+    "nResults": "{{count}} results",
+    "walletName": "지갑 이름",
+    "description": "설명",
+    "minimumApproval": "최소 승인",
+    "authorisedWallets": "인증된 지갑",
+    "proposalCreation": "제안서 생성",
+    "now": "지금",
+    "you": "당신",
+    "testNet": "테스트 네트워크",
+    "mainNet": "메인 네트워크",
+    "logo": "로고",
+    "summary": "요약",
+    "notChangeable": "변경 불가"
+  },
+  "placeHolders": {
+    "selectToken": "토큰을 선택하세요...",
+    "searchTokens": "검색하려면 입력하세요...",
+    "walletName": "다중서명 지갑 이름을 입력하세요...",
+    "addResource": "예: 웹사이트, Discord 등",
+    "msWalletDescription": "다중서명 지갑 설명을 입력하세요..."
+  },
+  "finance": {
+    "unknownUSDValue": "가치 불명",
+    "tokens": "토큰",
+    "allocation": "할당",
+    "emptyState": {
+      "title": "첫 번째 입금",
+      "buttonLabel": "자금 입금",
+      "description": "자금이 없습니다. 시작하려면 첫 번째 입금을 하세요."
+    }
+  },
+  "governance": {
+    "action": "새 제안서",
+    "emptyState": {
+      "title": "첫 번째 제안서 생성",
+      "subtitle": "시작하려면 제안서를 생성하세요.",
+      "description": "제안서가 없습니다. 시작하려면 첫 번째 제안서를 생성하세요."
+    },
+    "proposals": {
+      "publishedBy": "게시자",
+      "states": {
+        "draft": "초안",
+        "pending": "대기 중",
+        "active": "활성",
+        "executed": "실행됨",
+        "succeeded": "성공",
+        "defeated": "실패"
+      },
+      "buttons": {
+        "vote": "지금 투표",
+        "execute": "지금 실행",
+        "closeFullProposal": "전체 제안서 닫기"
+      },
+      "alert": {
+        "voted": "이미 투표했습니다."
+      }
+    },
+    "noProposals": "제안서를 찾을 수 없습니다!",
+    "statusWidget": {
+      "published": "게시됨",
+      "active": "실행 중",
+      "failed": "실행 실패",
+      "executed": "실행됨",
+      "succeeded": "성공"
+    },
+    "executionCard": {
+      "title": "액션",
+      "description": "설정한 매개변수가 충족되면 이러한 액션을 실행할 수 있습니다.",
+      "addAction": "액션 추가",
+      "seeTransaction": "거래 보기",
+      "status": {
+        "succeeded": "제안서가 통과되어 실행 준비가 되었습니다",
+        "executed": "액션 실행됨",
+        "failed": " Execution failed"
+      },
+      "statusMultisig": {
+        "expiredTitle": "실행이 더 이상 사용할 수 없음",
+        "expiredDesc": "만료 시간이 지나서 더 이상 실행이 불가능합니다. 이 액션을 수행하려면 새 제안서를 생성하고 더 긴 만료 시간을 설정해야 할 수 있습니다."
+      }
+    }
+  },
+  "infos": {
+    "checkingEns": "다중서명 지갑 이름 확인 중..."
+  },
+  "errors": {
+    "amountWithInvalidToken": "유효하지 않은 토큰 주소로 금액을 검증할 수 없습니다",
+    "defaultAmountValidationError": "금액 검증 오류",
+    "includeExactAmount": "토큰에 소수점이 없습니다. 정확한 금액을 입력하세요",
+    "insufficientBalance": "잔액 부족",
+    "invalidURL": "유효하지 않은 URL",
+    "invalidAddress": "유효하지 않은 주소",
+    "lteZero": "금액은 0보다 커야 합니다",
+    "noTokenSelected": "토큰을 선택해야 합니다",
+    "duplicateAddress": "주소를 재사용하면 안 됩니다",
+    "duplicateAddressOnCurrentMembersList": "이 지갑 주소는 이미 이 다중서명의 구성원입니다.",
+    "totalSupplyZero": "총 토큰 공급량은 0이 될 수 없습니다",
+    "ensDuplication": "ENS 하위 도메인이 이미 사용 중입니다. 다른 이름을 시도해보세요.",
+    "ensNameInvalidFormat": "소문자, 숫자, 대시 '-'만 사용해주세요",
+    "ensNetworkIssue": "ENS 해결 실패",
+    "ensNameLength": "다중서명 지갑 이름은 128자 미만이어야 합니다",
+    "required": {
+      "tokenAddress": "토큰 주소가 필요합니다",
+      "walletAddress": "지갑 주소가 필요합니다",
+      "amount": "토큰 금액이 필요합니다",
+      "label": "라벨은 필수입니다",
+      "link": "링크는 필수입니다",
+      "recipient": "수신자 주소가 필요합니다",
+      "token": "토큰이 필요합니다",
+      "name": "다중서명 지갑 이름은 필수입니다",
+      "title": "제목이 필요합니다",
+      "summary": "요약이 필요합니다",
+      "minApproval": "제안서를 승인하려면 최소 하나의 인증된 주소가 필요합니다."
+    },
+    "minimumApproval": {
+      "exceedMaxThreshold": "최소 승인 임계값은 총 구성원 수를 초과할 수 없습니다."
+    },
+    "exceedsFractionalParts": "금액이 최대 소수점 자릿수({{decimals}})를 초과합니다",
+    "ltAmount": "금액은 {{amount}}보다 커야 합니다"
+  },
+  "alert": {
+    "multisig": {
+      "proposalMinDuration": "1시간이 최소 만료 시간입니다.",
+      "proposalMaxDuration": "다중서명 지갑을 안전하게 유지하려면 만료 시간을 2주보다 길게 설정하는 것은 권장하지 않습니다.",
+      "accepTableProposalDuration": "깔끔한 제안서 목록을 위해 5일의 만료 시간을 권장합니다."
+    },
+    "wrongWalletNetwork": "잘못된 지갑 네트워크",
+    "wrongNetwork": {
+      "title": "잘못된 네트워크",
+      "description": "계속하려면 올바른 네트워크로 전환해 주세요.",
+      "buttonLabel": "네트워크 전환"
+    },
+    "loginRequired": {
+      "headerTitle": "계속하려면 지갑 연결",
+      "title": "지갑 연결",
+      "description": "계속하려면 지갑을 연결하세요.",
+      "buttonLabel": "지금 지갑 연결"
+    },
+    "gatingUsers": {
+      "tokenTitle": "토큰을 찾을 수 없습니다",
+      "walletTitle1": "제안서를 생성할 수 없습니다",
+      "walletDescription1": "구성원이 아닙니다. 테스트에서 제안서 생성은 구성원 목록에 추가된 주소만 할 수 있습니다.",
+      "buttonLabel": "알겠습니다",
+      "tokenDescription": "{{tokenName}}을(를) 찾을 수 없습니다. 지갑에 토큰 주소를 추가해 주세요."
+    },
+    "chip": {
+      "removedLink": "링크 제거됨",
+      "removedAddress": "주소 제거됨",
+      "distributionReset": "토큰 배포 재설정",
+      "removedAllAddresses": "모든 주소 제거됨",
+      "duplicateAction": "액션 복제됨",
+      "resetAction": "액션 재설정됨",
+      "resetAddress": "주소 재설정됨",
+      "resetAllAddresses": "모든 주소 재설정됨",
+      "removedAction": "액션 제거됨",
+      "addressAdded": "새 주소 추가됨",
+      "inputCleared": "지워짐",
+      "inputCopied": "복사됨",
+      "inputPasted": "붙여넣기됨",
+      "walletConnected": "지갑 연결됨",
+      "walletDisconnected": "지갑 연결 해제됨",
+      "max": "최대 잔액 적용됨"
+    }
+  },
+  "warnings": {
+    "amountGtDaoToken": "출금 금액이 현재 토큰 잔액보다 큽니다"
+  },
+  "allTransfer": {
+    "newTransfer": "새 전송",
+    "noTransfers": "전송 정보를 사용할 수 없습니다."
+  },
+  "allTokens": {
+    "noTokens": "토큰 정보를 사용할 수 없습니다."
+  },
+  "TransferModal": {
+    "newTransfer": "새 전송",
+    "item2Title": "자산 출금",
+    "item2Subtitle": "지갑으로 자산을 출금하는 제안서를 생성하세요."
+  },
+  "TokenModal": {
+    "tokenNotFoundTitle": "토큰을 찾을 수 없습니다",
+    "tokenNotAvailable": "토큰을 찾을 수 없습니다",
+    "tokenNotFoundSubtitle": "입금할 사용자 정의 토큰 추가",
+    "tokenNotFoundSubtitleDao": "출금할 사용자 정의 토큰 추가",
+    "tokenNotAvailableSubtitle": "지갑을 확인하고, 토큰을 업데이트하거나 전송할 사용자 정의 토큰을 추가하세요",
+    "tokenNotAvailableSubtitleDao": "토큰을 업데이트하거나 전송할 사용자 정의 토큰을 추가하세요."
+  },
+  "AddressModal": {
+    "noAddresses": "주소를 찾을 수 없습니다"
+  },
+  "TransactionModal": {
+    "goToProposal": "제안서 열기",
+    "launchMSWDashboard": "다중서명 지갑 대시보드 시작",
+    "errorLabel": "거래 확인 중 오류",
+    "gasEstimationErrorLabel": "가스 수수료 추정에 실패했습니다. 계속 진행할 수 있습니다.",
+    "estimatedFees": "예상 가스 수수료",
+    "maxFee": "최대 수수료",
+    "publishMSWSubtitle": "아래 수수료는 선택한 블록체인 사용 비용입니다.",
+    "publishDaoButtonLabel": "거래 승인",
+    "successLabel": "거래 실행됨",
+    "totalCost": "총 비용",
+    "tryAgain": "다시 시도",
+    "createProposal": "제안서 생성",
+    "waiting": "확인 대기 중"
+  },
+  "AddActionModal": {
+    "title": "액션 추가",
+    "addAddresses": "지갑 인증",
+    "addAddressesSubtitle": "다중서명 지갑에서 투표할 새 지갑을 인증하는 제안서를 생성하세요.",
+    "removeAddresses": "지갑 제거",
+    "removeAddressesSubtitle": "다중서명 지갑에서 투표할 수 없도록 지갑을 비인증하는 제안서를 생성하세요.",
+    "withdrawAssetsSubtitle": "지갑으로 자산을 출금하는 제안서를 생성하세요.",
+    "withdrawAssetsActionSubtitle": "다중서명 지갑 자금고에서 자산 출금"
+  },
+  "newDeposit": {
+    "contractAddressSubtitle": "사용자 정의 토큰을 선택했습니다. 이 토큰과 상호 작용하려면 이 토큰의 계약 주소를 입력하세요."
+  },
+  "newWithdraw": {
+    "configureWithdraw": {
+      "title": "출금 시작",
+      "subtitle": "자금고에서 자산을 출금하려면 제안서가 투표를 통과해야 합니다.",
+      "toSubtitle": "토큰을 받는 지갑",
+      "tokenSubtitle": "출금할 토큰",
+      "amountSubtitle": "금액은 달러 가치가 아닌 토큰 수로 계산됩니다",
+      "ctaAddAnother": "다른 출금 추가",
+      "utcMenu": {
+        "title": "UTC 시간대 선택"
+      }
+    },
+    "setupVoting": {
+      "title": "투표 시작",
+      "description": "투표의 선택지, 시작 날짜, 종료 날짜를 설정하세요.",
+      "optionLabel": {
+        "title": "옵션"
+      },
+      "multisig": {
+        "optionDescription": "투표 옵션",
+        "votingOption": {
+          "label": "승인",
+          "alert": "승인은 다중서명 지갑의 유일한 선택사항입니다.",
+          "description": "다중서명 지갑은 거래를 실행하기 위해 여러 구성원의 승인이 필요합니다."
+        }
+      }
+    },
+    "defineProposal": {
+      "heading": "제안서 생성",
+      "description": "투표자가 결정을 내리는 데 필요한 정보를 여기에 제공하세요.",
+      "title": "제목",
+      "titlePlaceholder": "제안서에 제목을 주세요",
+      "summaryPlaceholder": "제안서를 2-3문장으로 설명하세요. 이것은 제안서 개요에 나타납니다.",
+      "body": "본문",
+      "proposalPlaceholder": "여기에 제안서 본문을 작성하세요."
+    },
+    "reviewProposal": {
+      "heading": "제안서 검토",
+      "description": "투표에 부치기 전에 모든 것이 올바른지 확인하세요. 제안서가 게시되면 편집할 수 없습니다."
+    }
+  },
+  "newProposal": {
+    "title": "새 제안서",
+    "configureActions": {
+      "yesOption": "\"예\" 옵션이 승리하면",
+      "addFirstAction": "액션 추가",
+      "addAction": "액션 추가",
+      "actionsInfo": "매개변수에 대한 더 많은 옵션이 곧 제공됩니다.",
+      "addFirstActionSubtitle": "시작하려면 첫 번째 액션을 추가하세요."
+    }
+  },
+  "votingTerminal": {
+    "title": "투표",
+    "breakdown": "세부 분석",
+    "voters": "투표자",
+    "info": "정보",
+    "yes": "예",
+    "abstain": "기권",
+    "no": "아니오",
+    "approve": "승인",
+    "approvedBy": "승인자",
+    "yesHelptext": "귀하의 선택은 \"예\"로 계산됩니다",
+    "abstainHelptext": "귀하의 선택은 \"기권\"으로 계산됩니다",
+    "noHelptext": "귀하의 선택은 \"아니오\"로 계산됩니다",
+    "inputPlaceholder": "지갑 ",
+    "options": "옵션",
+    "strategy": "전략",
+    "tokenVoting": "1 토큰 → 1 투표",
+    "multisig": "1 지갑 → 1 투표",
+    "supportThreshold": "최소 지지",
+    "minParticipation": "최소 참여 (정족수)",
+    "currentParticipation": "현재 참여",
+    "currentApproval": "현재 승인",
+    "noVotesMissing": "누락된 투표 없음",
+    "noApprovalsMissing": "누락된 승인 없음",
+    "reached": "달성됨",
+    "uniqueVoters": "고유 투표자",
+    "duration": "기간",
+    "decision": "결정 규칙",
+    "activity": "투표 활동",
+    "startDate": "시작",
+    "endDate": "종료",
+    "submit": "투표 제출",
+    "concluded": "종료됨",
+    "status": {
+      "draft": "투표를 활성화하려면 제안서를 게시하세요",
+      "executed": "제안서 실행됨",
+      "active": "투표는 {{timeUntilEnd}}에 종료됩니다",
+      "ineligibleWhitelist": "투표하려면 제안서가 생성되기 전에 구성원이어야 합니다",
+      "approved": "승인됨"
+    },
+    "emptyState": {
+      "subtitle": "다른 지갑 주소 검색",
+      "title": "투표자를 찾을 수 없음",
+      "titleSearch": "이 검색어에 대한 투표자를 찾을 수 없음"
+    },
+    "ofMemberCount": "{{count}}명 구성원 중",
+    "ofAddressCount": "{{count}}개 주소 중",
+    "missingApprovals": "{{count}}개 승인 더 필요",
+    "label": {
+      "in": "내부"
+    }
+  },
+  "explore": {
+    "hero": {
+      "title": "다중서명 지갑",
+      "subtitle1": "자산을 안전하게 보관하기 위해 다중 서명 지갑을 생성하세요."
+    },
+    "explorer": {
+      "title": "지갑 탐색",
+      "walletBased": "지갑 기반",
+      "showMore": "더 보기"
+    },
+    "learn": {
+      "linkLabel": "다중 서명 지갑에 대해서 학습하기",
+      "linkURL": "https://aragon.org/education-portal"
+    }
+  },
+  "privacyPolicy": {
+    "title": "개인정보 보호정책",
+    "analytics": "분석 쿠키",
+    "analyticsHelpText": "앱 사용 방법에 대한 정보를 수집합니다.",
+    "functional": "기능 쿠키",
+    "functionalHelpText": "애플리케이션에서 기본 설정을 저장하는 데 사용됩니다.",
+    "cookieSettings": "쿠키 설정",
+    "acceptAllCookies": "모두 수락",
+    "rejectAllCookies": "모두 거부",
+    "acceptSelectedCookies": "수락",
+    "content": "우리는 귀하의 경험을 향상시키고, 특정 기능을 활성화하고, 애플리케이션 사용을 분석하기 위해 쿠키와 유사한 기술을 사용합니다. 여기서 쿠키를 선택 해제할 수 있습니다. {{link}}에서 자세히 알아보세요."
+  },
+  "cookiePreferences": {
+    "title": "쿠키 기본 설정",
+    "content": "이 기능에 액세스하려면 기본 설정을 저장해야 합니다. 계속하려면 쿠키를 활성화하세요.",
+    "accept": "수락",
+    "cancel": "취소"
+  },
+  "cta": {
+    "404": {
+      "titleLine1": "앗,",
+      "titleLine2": "다중서명 지갑 공간에서 웜홀을 발견했습니다!",
+      "backToExplore": "탐색으로 돌아가기"
+    },
+    "create": {
+      "title": "다중서명 지갑 생성",
+      "description": "다중서명 지갑은 거래에 둘 이상의 서명을 요구하여 보안을 강화하는 기술입니다.",
+      "actionLabel": "다중서명 지갑 생성"
+    },
+    "learn": {
+      "title": "학습하기",
+      "description": "다중 서명 지갑을 생성하고 사용하는 방법을 학습합니다."
+    },
+    "build": {
+      "title": "더 빠르게 구축",
+      "description": "거버넌스 플러그인을 사용하여 Aragon OSx 프로토콜에서 다중서명 지갑, dApp 또는 상상할 수 있는 모든 것을 구축하세요.",
+      "actionLabel": "곧 출시"
+    }
+  },
+  "settings": {
+    "proposeSettings": "새 설정 제안"
+  },
+  "dashboard": {
+    "proposalsTitle": "생성된 제안서"
+  },
+  "modal": {
+    "deposit": {
+      "headerTitle": "자산 입금",
+      "headerDescription": "다중서명 지갑 자금고에 자산 전송",
+      "inputLabelEns": "다중서명 지갑 자금고",
+      "inputHelptextEns": "아래 주소를 복사하고 지갑의 전송 기능을 사용하여 다중서명 지갑 자금고에 돈을 보내세요.",
+      "ctaLabel": "모든 전송 보기",
+      "cancelLabel": "취소",
+      "inputLabelBlockchain": "블록체인",
+      "inputHelptextBlockchain": "적절한 블록체인을 사용하세요. 자금이 전송되면 복원할 수 없습니다.",
+      "ctaBlockchain": "연결",
+      "statusBlockchain": "연결됨"
+    },
+    "exitProcess": {
+      "description": "프로세스를 떠나면 입력한 모든 정보가 손실됩니다. 프로세스를 종료하시겠습니까?",
+      "ctaLabel": "예, 지금 종료",
+      "cancelLabel": "아니오, 계속",
+      "titleProposalCreation": "제안서 생성 종료",
+      "titleDaoCreation": "다중서명 지갑 생성 종료"
+    },
+    "claimPoap": {
+      "ctaLabel": "지금 POAP 받기",
+      "ctaURL": "https://poap-claim-app.aragon.org/",
+      "title": "다중서명 지갑 빌더 POAP 받기"
+    },
+    "mintTokensToTreasury": {
+      "title": "다중서명 지갑 자금고에 토큰 민팅",
+      "description": "다중서명 지갑은 투표할 수 없습니다. 최소 참여에 도달하지 못할 수 있으므로 다중서명 지갑 자금고에 너무 많은 토큰을 민팅하지 않도록 주의하세요. 그러면 제안서 액션을 실행할 수 없게 됩니다.",
+      "alertTitle": "다중서명 지갑의 잠재적 위험",
+      "alertDescription": "다중서명 지갑 자금고에 토큰을 민팅하는 대신, 토큰이 투표에 사용될 수 있도록 구성원의 지갑 주소에 민팅하는 것을 고려하세요.",
+      "step1CtaLabel": "토큰 민팅으로 돌아가기",
+      "step1CancelLabel": "다중서명 지갑 주소로 진행",
+      "inputLabel": "다중서명 지갑 주소로 확인",
+      "inputHelptext": "확인하려면 아래에 다중서명 지갑 계약 주소를 입력하세요.",
+      "step2CtaLabel": "확인",
+      "step2CancelLabel": "취소"
+    }
+  },
+  "scc": {
+    "labels": {
+      "searchPlaceholder": "액션을 찾으려면 입력하세요..."
+    }
+  },
+  "inputWallet": {
+    "placeholder": "0x…",
+    "ensAlertSuccess": "ENS 해결 성공",
+    "addressAlertSuccess": "주소 해결 성공",
+    "ensAlertWarning": "이 네트워크는 ENS 도메인을 지원하지 않습니다",
+    "ensAlertCirtical": "유효하지 않은 ENS",
+    "addressAlertCritical": "유효하지 않은 주소"
+  },
+  "modalAlert": {
+    "wrapToken": {
+      "title": "거버넌스 토큰을 찾을 수 없습니다",
+      "desc": "이 지갑에서 거버넌스 토큰을 찾을 수 없습니다."
+    }
+  },
+  "wc": {
+    "emptyState": {
+      "modalTitle": "dApp 연결",
+      "title": "WalletConnect",
+      "ctaLabel": "첫 번째 dApp 연결",
+      "desc": "WalletConnect 프로토콜을 사용하여 dApp에 연결"
+    },
+    "listdApps": {
+      "emptyStateSearch": {
+        "title": "표시할 결과 없음",
+        "desc": "이 검색어에 대한 연결된 dApp을 찾을 수 없습니다.",
+        "ctaLabel": "검색 재설정"
+      },
+      "pretitle": {
+        "searchResults": "\"{{searchTerm}}\"에 대한 {{count}}개 결과"
+      },
+      "listTitle": "연결된 dApp ({{count}})",
+      "learnLinkLabel": "자세히 알아보기",
+      "ctaLabelDefault": "dApp 연결"
+    },
+    "validation": {
+      "modalTitle": "dApp 연결",
+      "codeInput": {
+        "statusSuccess": "연결 성공"
+      },
+      "codeInputHelp": "QR 코드를 클립보드에 복사하고 아래에 붙여넣어 원하는 dApp에 연결하세요.",
+      "codeInputLabel": "WalletConnect QR 코드",
+      "codeInputPlaceholder": "wc: …",
+      "ctaLabel": "dApp 연결",
+      "addressInput": {
+        "alertCritical": "dApp 연결 실패. 다시 시도하세요"
+      },
+      "ctaLabelSuccess": "액션 추가 시작",
+      "ctaLabelCritical": "다시 시도",
+      "ctaLabelVerifying": "dApp 연결 중..."
+    },
+    "detaildApp": {
+      "spinnerLabel": "액션 수신 중...",
+      "noActionsTag": "아직 수신된 액션 없음",
+      "desc": "{{appName}}에 연결됨",
+      "amountActionsTag": "{{count}}개 액션",
+      "ctaLabel": {
+        "addAmountActions": "{{count}}개 액션 추가",
+        "opendApp": "dApp 열기",
+        "disconnectdApp": "dApp 연결 해제"
+      }
+    }
+  },
+  "createMSWallet": {
+    "title": "다중서명 지갑 생성",
+    "overview": {
+      "button": "다중서명 지갑 생성",
+      "title": "새로운 다중서명 지갑 생성",
+      "description": "자산을 관리할 수 있는 보안 다중 서명 지갑을 생성하세요."
+    },
+    "step1": {
+      "label": "블록체인 선택",
+      "title": "블록체인 선택",
+      "description": "다중서명 지갑이 배포될 블록체인을 선택하세요. 나중에 변경할 수 없습니다."
+    },
+    "step2": {
+      "label": "세부 정보 추가",
+      "title": "세부 정보 추가",
+      "description": "다중서명 지갑에 대한 기본 정보를 추가하세요.",
+      "nameSubtitle": "다중서명 지갑에 설명적인 이름을 지어주세요",
+      "descriptionSubtitle": "다중서명 지갑의 목적을 설명하세요"
+    },
+    "step3": {
+      "label": "구성원 추가",
+      "title": "구성원 추가",
+      "authorisedWalletsSubtitle": "제안서에 투표할 수 있는 지갑을 추가하세요.",
+      "multisigMembers": "다중서명 구성원",
+      "multisigMembersHelptext": "제안서에 투표할 수 있는 지갑 주소를 추가하세요",
+      "multisigMembersWalletAlert": "최소 한 명의 구성원이 필요합니다",
+      "eligibility": {
+        "anyWallet": {
+          "title": "모든 지갑이 참여할 수 있습니다"
+        }
+      }
+    },
+    "step4": {
+      "label": "거버넌스",
+      "title": "거버넌스 구성",
+      "description": "다중서명 지갑의 거버넌스 매개변수를 설정하세요.",
+      "minimumApprovalSubtitle": "필요한 최소 승인 수",
+      "minApprovalAddressCount": "{{count}}개 승인 필요",
+      "alerts": {
+        "minority": "소수 규칙",
+        "majority": "다수 규칙",
+        "absoluteMajority": "절대 다수 규칙"
+      },
+      "shortTitle": "거버넌스"
+    },
+    "review": {
+      "title": "다중서명 지갑 검토",
+      "description": "다중서명 지갑을 생성하기 전에 모든 세부 정보를 검토하세요.",
+      "valuesCorrect": "다중서명 지갑 세부 정보를 검토했으며 올바르다고 확인합니다",
+      "acceptContent": "이 작업은 되돌릴 수 없다는 것을 이해합니다",
+      "daoUpdates": "다중서명 지갑 업데이트",
+      "distributionLink": "배포 링크"
+    }
+  }
+}

@@ -16,6 +16,7 @@ import useScreen from 'hooks/useScreen';
 import {useWallet} from 'hooks/useWallet';
 import MobileMenu from './mobileMenu';
 import NetworkIndicator from './networkIndicator';
+import {LanguageSelector} from '../../components/languageSelector';
 
 type MobileNavProps = {
   isProcess?: boolean;
@@ -79,7 +80,10 @@ const MobileNav: React.FC<MobileNavProps> = props => {
             />
           </FlexOne>
         </Menu>
-        <NetworkIndicator />
+        <div className="flex gap-2 items-center">
+          <LanguageSelector />
+          <NetworkIndicator />
+        </div>
       </Container>
       <MobileMenu />
     </>

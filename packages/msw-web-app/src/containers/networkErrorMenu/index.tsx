@@ -22,7 +22,6 @@ import {handleClipboardActions, shortenAddress} from 'utils/library';
 const NetworkErrorMenu = () => {
   const {isNetworkOpen, close} = useGlobalModalContext();
   const {network} = useNetwork();
-  console.log(`network: ${JSON.stringify(network)}`);
   const {switchWalletNetwork} = useSwitchNetwork();
   const {address, connectorName} = useWallet();
   const {isDesktop} = useScreen();

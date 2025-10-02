@@ -2,8 +2,8 @@ export default class CreateMSWallet {
   goToCreateDAOPage() {
     cy.visit('/#/create');
 
-    // Clicks Build your DAO on DAO Overview page
-    cy.get('button').contains('Build your DAO').click();
+    // Clicks Build your MS Wallet on DAO Overview page
+    cy.get('button').contains('Build your MS Wallet').click();
 
     // Fills out the Select Chain form and proceeds to the next page
     cy.get('button').contains('Testnet').click();
@@ -16,7 +16,7 @@ export default class CreateMSWallet {
     cy.get('input[name="walletName"]').type('Cypress test');
     cy.get('input[name="walletEnsName"]').type(Date.now().toString());
     cy.get('textarea[name="walletSummary"]').type(
-      'Cypress test to test Multisig DAO Creation'
+      'Cypress test to test Multisig Wallet Creation'
     );
     cy.get('button[mode="primary"]')
       .contains('Next')
@@ -46,7 +46,7 @@ export default class CreateMSWallet {
       .should('contain', 'These values are correct')
       .each(el => el.trigger('click'));
     cy.get('button[mode="primary"]')
-      .contains('Deploy your DAO')
+      .contains('Deploy your MS Wallet')
       .parent()
       .should('not.be.disabled')
       .click();

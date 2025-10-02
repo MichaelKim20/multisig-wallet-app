@@ -45,7 +45,9 @@ const MinimumApproval: React.FC<Props> = ({max, min, ...rest}) => {
                 {value <= max ? value : max}
               </ApprovalAddresses>
               <TotalAddresses>
-                {t('createDAO.step4.minApprovalAddressCount', {count: max})}
+                {t('createMSWallet.step4.minApprovalAddressCount', {
+                  count: max,
+                })}
               </TotalAddresses>
             </ProgressInfo>
           </LinearProgressContainer>

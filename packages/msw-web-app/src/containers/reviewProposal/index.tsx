@@ -47,7 +47,7 @@ const ReviewProposal: React.FC<ReviewProposalProps> = ({
   const {setStep} = useFormStep();
 
   const {data: walletDetails} = useMSWalletDetailsQuery();
-  const {data: daoSettings} = usePluginSettings(
+  const {data: msWalletSettings} = usePluginSettings(
     walletDetails?.address as string
   );
 
@@ -75,7 +75,9 @@ const ReviewProposal: React.FC<ReviewProposalProps> = ({
     const {startSwitch, startDate, startTime, startUtc} = values;
 
     if (startSwitch === 'now') {
-      const startMinutesDelay = isMultisigVotingSettings(daoSettings) ? 0 : 10;
+      const startMinutesDelay = isMultisigVotingSettings(msWalletSettings)
+        ? 0
+        : 10;
       return new Date(
         `${getCanonicalDate()}T${getCanonicalTime({
           minutes: startMinutesDelay,
@@ -86,11 +88,11 @@ const ReviewProposal: React.FC<ReviewProposalProps> = ({
         `${startDate}T${startTime}:00${getCanonicalUtcOffset(startUtc)}`
       );
     }
-  }, [daoSettings, values]);
+  }, [msWalletSettings, values]);
 
   const formattedStartDate = useMemo(() => {
     const {startSwitch} = values;
-    if (startSwitch === 'now' || isMultisigVotingSettings(daoSettings)) {
+    if (startSwitch === 'now' || isMultisigVotingSettings(msWalletSettings)) {
       return t('labels.now');
     }
 
@@ -98,7 +100,7 @@ const ReviewProposal: React.FC<ReviewProposalProps> = ({
       startDate,
       KNOWN_FORMATS.proposals
     )} ${getFormattedUtcOffset()}`;
-  }, [daoSettings, startDate, t, values]);
+  }, [msWalletSettings, startDate, t, values]);
 
   /**
    * This is the primary (approximate) end date display which is rendered in Voting Terminal
@@ -174,7 +176,9 @@ const ReviewProposal: React.FC<ReviewProposalProps> = ({
 
     // adding 10 minutes to offset the 10 minutes added by starting now
     if (startSwitch === 'now') {
-      const startMinutesDelay = isMultisigVotingSettings(daoSettings) ? 0 : 10;
+      const startMinutesDelay = isMultisigVotingSettings(msWalletSettings)
+        ? 0
+        : 10;
       endDateTime = new Date(
         endDateTime.getTime() + minutesToMills(startMinutesDelay)
       );
@@ -184,18 +188,18 @@ const ReviewProposal: React.FC<ReviewProposalProps> = ({
       endDateTime,
       KNOWN_FORMATS.proposals
     )} ${getFormattedUtcOffset()}`;
-  }, [daoSettings, values]);
+  }, [msWalletSettings, values]);
 
   const terminalProps = useMemo(
     () =>
       getReviewProposalTerminalProps(
         t,
-        daoSettings,
+        msWalletSettings,
         members
         // daoToken,
         // totalSupply?.raw
       ),
-    [daoSettings, members, t]
+    [msWalletSettings, members, t]
   );
   //console.log('ReviewProposal terminalProps', terminalProps);
 
@@ -256,8 +260,8 @@ const ReviewProposal: React.FC<ReviewProposalProps> = ({
           <ExecutionWidget
             actions={getNonEmptyActions(
               values.actions,
-              isMultisigVotingSettings(daoSettings)
-                ? daoSettings.minApprovals
+              isMultisigVotingSettings(msWalletSettings)
+                ? msWalletSettings.minApprovals
                 : 0
             )}
             onAddAction={
@@ -343,14 +347,14 @@ export const StyledEditorContent = styled(EditorContent)`
 // this is slightly different from
 function getReviewProposalTerminalProps(
   t: TFunction,
-  daoSettings: SupportedVotingSettings,
+  msWalletSettings: SupportedVotingSettings,
   daoMembers: Array<MultisigMember> | undefined
   // daoToken: Erc20TokenDetails | undefined,
   // totalSupply: bigint | undefined
 ) {
   return {
-    minApproval: isMultisigVotingSettings(daoSettings)
-      ? daoSettings.minApprovals
+    minApproval: isMultisigVotingSettings(msWalletSettings)
+      ? msWalletSettings.minApprovals
       : undefined,
     strategy: t('votingTerminal.multisig'),
     voteOptions: t('votingTerminal.approve'),
@@ -361,11 +365,11 @@ function getReviewProposalTerminalProps(
       ) || [],
   };
   //
-  // if (isTokenVotingSettings(daoSettings) && daoToken && totalSupply) {
+  // if (isTokenVotingSettings(msWalletSettings) && daoToken && totalSupply) {
   //   // calculate participation
   //   const {currentPart, currentPercentage, minPart, missingPart, totalWeight} =
   //     getErc20VotingParticipation(
-  //       daoSettings.minParticipation,
+  //       msWalletSettings.minParticipation,
   //       BigInt(0),
   //       totalSupply,
   //       daoToken.decimals
@@ -383,14 +387,14 @@ function getReviewProposalTerminalProps(
   //       participation: minPart,
   //       totalWeight,
   //       tokenSymbol: daoToken.symbol,
-  //       percentage: Math.round(daoSettings.minParticipation * 100),
+  //       percentage: Math.round(msWalletSettings.minParticipation * 100),
   //     }),
   //
   //     missingParticipation: missingPart,
   //
   //     strategy: t('votingTerminal.tokenVoting'),
   //     voteOptions: t('votingTerminal.yes+no'),
-  //     supportThreshold: Math.round(daoSettings.supportThreshold * 100),
+  //     supportThreshold: Math.round(msWalletSettings.supportThreshold * 100),
   //   };
   // }
 }

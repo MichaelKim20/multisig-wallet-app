@@ -1,1 +1,1 @@
-export * from './daoExplorer';
+export * from './walletExplorer';

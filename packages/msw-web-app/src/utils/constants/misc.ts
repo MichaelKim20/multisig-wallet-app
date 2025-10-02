@@ -1,7 +1,6 @@
 import {
   IconCommunity,
   IconDashboard,
-  IconFinance,
   IconGovernance,
   IconType,
   IconSettings,
@@ -93,10 +92,6 @@ export const enum TransferTypes {
 
 export const MAX_TOKEN_DECIMALS = 18;
 
-// TokenVoting duration boundaries
-export const MAX_DURATION_DAYS = 365;
-export const MIN_DURATION_HOURS = 1;
-
 // Multisig duration boundaries
 // Note: multisig does not contain a hard end boundary
 export const MULTISIG_MIN_DURATION_HOURS = 1;
@@ -123,29 +118,7 @@ export const PROPOSAL_STATE_LABELS = [
 ];
 
 // Storage and cacheing keys
-export const FAVORITE_WALLETS_KEY = 'favoriteMSWallets';
-export const PENDING_DEPOSITS_KEY = 'pendingDeposits';
-export const PENDING_PROPOSALS_KEY = 'pendingProposals';
 export const PENDING_MULTISIG_PROPOSALS_KEY = 'pendingMultisigProposals';
-export const PENDING_VOTES_KEY = 'pendingVotes';
 export const PENDING_MULTISIG_VOTES_KEY = 'pendingMultisigVotes';
-export const PENDING_DAOS_KEY = 'pendingDaos';
 export const PENDING_EXECUTION_KEY = 'pendingExecution';
 export const PENDING_MULTISIG_EXECUTION_KEY = 'pendingMultisigExecution';
-export const VERIFIED_CONTRACTS_KEY = 'verifiedContracts';
-
-// TODO: build more
-// Time sensitive fields (intentionally lowercasing)
-export const POTENTIALLY_TIME_SENSITIVE_FIELDS = new Set<string>([
-  'cliffperiod',
-  'deadline',
-  'endtime',
-  'expirydate',
-  'freezeperiod',
-  'lockduration',
-  'lockexpiration',
-  'timelock',
-  'timerestriction',
-  'unlocktime',
-  'vestingduration',
-]);

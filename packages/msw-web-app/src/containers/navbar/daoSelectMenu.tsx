@@ -12,11 +12,7 @@ import styled from 'styled-components';
 
 import {useReactiveVar} from 'context/apolloClient';
 import ModalBottomSheetSwitcher from 'components/modalBottomSheetSwitcher';
-import {
-  favoriteMSWalletsVar,
-  NavigationMSWallet,
-  selectedMSWalletVar,
-} from 'context/apolloClient';
+import {NavigationMSWallet, selectedMSWalletVar} from 'context/apolloClient';
 import {useGlobalModalContext} from 'context/globalModals';
 import useScreen from 'hooks/useScreen';
 import {getSupportedNetworkByChainId} from 'utils/constants';
@@ -27,22 +23,7 @@ const DaoSelectMenu: React.FC = () => {
   const {isDesktop} = useScreen();
   const navigate = useNavigate();
   const currentWallet = useReactiveVar(selectedMSWalletVar);
-  const favoriteWalletCache = useReactiveVar(favoriteMSWalletsVar);
   const {isSelectWalletOpen, close, open} = useGlobalModalContext();
-
-  const handleDaoSelect = useCallback(
-    (msWallet: NavigationMSWallet) => {
-      selectedMSWalletVar.set(msWallet);
-      navigate(
-        generatePath(Dashboard, {
-          network: getSupportedNetworkByChainId(msWallet.chain),
-          msWallet: msWallet.address,
-        })
-      );
-      close('selectDao');
-    },
-    [close, navigate]
-  );
 
   const handleBackButtonClick = useCallback(() => {
     close('selectDao');
@@ -76,24 +57,6 @@ const DaoSelectMenu: React.FC = () => {
               walletName={currentWallet?.metadata.name}
               onClick={() => close('selectDao')}
             />
-            {favoriteWalletCache.flatMap(msw => {
-              if (
-                msw.address.toLowerCase() ===
-                  currentWallet.address.toLowerCase() &&
-                msw.chain === currentWallet.chain
-              ) {
-                return [];
-              } else {
-                return (
-                  <ListItemDao
-                    key={msw.address}
-                    msWalletAddress={msw.address}
-                    walletName={msw.metadata.name}
-                    onClick={() => handleDaoSelect(msw)}
-                  />
-                );
-              }
-            })}
           </ListGroup>
         </ModalContentContainer>
         <div className="p-3">

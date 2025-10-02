@@ -45,10 +45,10 @@ export const OverviewMSWalletHeader: React.FC<OverviewDAOHeaderProps> = ({
       <div className="tablet:flex items-end tablet:space-x-6">
         <div className="w-full">
           <h1 className="font-bold text-ui-800 ft-text-3xl">
-            {t('createDAO.overview.title')}
+            {t('createMSWallet.overview.title')}
           </h1>
           <p className="mt-2 text-ui-600 ft-text-lg">
-            {t('createDAO.overview.description')}
+            {t('createMSWallet.overview.description')}
           </p>
         </div>
         <div className="flex mt-2 tablet:mt-0 space-x-2">
@@ -63,7 +63,7 @@ export const OverviewMSWalletHeader: React.FC<OverviewDAOHeaderProps> = ({
             size="large"
             className="w-full tablet:w-max whitespace-nowrap"
             iconRight={<IconChevronRight />}
-            label={t('createDAO.overview.button')}
+            label={t('createMSWallet.overview.button')}
             onClick={handleSetupClick}
             css={{}}
           />
@@ -77,26 +77,26 @@ const OverviewCards = [
   <CardWithImage
     key="SelectBlockchain"
     imgSrc={<IlluObject object="chain" />}
-    caption={i18n.t('createDAO.step1.label')}
-    title={i18n.t('createDAO.step1.title')}
+    caption={i18n.t('createMSWallet.step1.label')}
+    title={i18n.t('createMSWallet.step1.title')}
   />,
   <CardWithImage
     key="DefineMetadata"
     imgSrc={<IlluObject object="labels" />}
-    caption={i18n.t('createDAO.step2.label')}
-    title={i18n.t('createDAO.step2.title')}
+    caption={i18n.t('createMSWallet.step2.label')}
+    title={i18n.t('createMSWallet.step2.title')}
   />,
   <CardWithImage
     key="SetupCommunity"
     imgSrc={<IlluObject object="users" />}
-    caption={i18n.t('createDAO.step3.label')}
-    title={i18n.t('createDAO.step3.title')}
+    caption={i18n.t('createMSWallet.step3.label')}
+    title={i18n.t('createMSWallet.step3.title')}
   />,
   <CardWithImage
     key="ConfigureGovernance"
     imgSrc={<IlluObject object="settings" />}
-    caption={i18n.t('createDAO.step4.label')}
-    title={i18n.t('createDAO.step4.shortTitle')}
+    caption={i18n.t('createMSWallet.step4.label')}
+    title={i18n.t('createMSWallet.step4.shortTitle')}
   />,
 ];
 

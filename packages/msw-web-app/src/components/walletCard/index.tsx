@@ -1,5 +1,6 @@
 import {AvatarDao, IconBlock, IconCommunity} from 'msw-ui-components';
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 import styled from 'styled-components';
 
 import useScreen from 'hooks/useScreen';
@@ -20,6 +21,10 @@ type DescriptionProps = {
 
 export const WalletCard = (props: IWalletCardProps) => {
   const {isDesktop} = useScreen();
+  const {t} = useTranslation();
+  
+  const networkName = getSupportedNetworkByChainId(props.chainId) || "unsupported";
+  const translatedNetworkName = t(`chainNames.${networkName}`);
 
   return (
       <Container data-testid="daoCard" onClick={props.onClick}>
@@ -35,7 +40,7 @@ export const WalletCard = (props: IWalletCardProps) => {
       <DaoMetadataWrapper>
         <IconWrapper>
           <StyledIconBlock />
-          <IconLabel>{CHAIN_METADATA[getSupportedNetworkByChainId(props.chainId) || "unsupported"].name}</IconLabel>
+          <IconLabel>{translatedNetworkName}</IconLabel>
         </IconWrapper>
       </DaoMetadataWrapper>
     </Container>

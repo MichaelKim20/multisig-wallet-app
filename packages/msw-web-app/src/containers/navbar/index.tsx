@@ -40,9 +40,6 @@ const Navbar: React.FC = () => {
 
   const processInfo = useMemo(() => {
     const matches = matchRoutes(processPaths, pathname);
-    //console.log('Navbar processPaths', processPaths);
-    //console.log('Navbar pathname', pathname);
-    //console.log('Navbar matches', matches);
     if (matches) return getProcessInfo(matches[0].route.path) as ProcessInfo;
   }, [pathname]);
 
@@ -121,7 +118,7 @@ export const processPaths = [
 
 export const processes: StringIndexed = {
   [CreateMSWallet]: {
-    processLabel: i18n.t('createDAO.title'),
+    processLabel: i18n.t('createMSWallet.title'),
     returnURL: Landing,
   },
   [NewDeposit]: {

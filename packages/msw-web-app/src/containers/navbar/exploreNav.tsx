@@ -12,7 +12,6 @@ const ExploreNav: React.FC = () => {
   const {t} = useTranslation();
   const {address, isConnected, methods} = useWallet();
   const {open} = useGlobalModalContext();
-  const path = t('logo.linkURL');
 
   const handleWalletButtonClick = () => {
     if (isConnected) {

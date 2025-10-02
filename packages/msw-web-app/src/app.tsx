@@ -75,11 +75,11 @@ function App() {
           <Route element={<ExploreWrapper />}>
             <Route path="/" element={<ExplorePage />} />
           </Route>
-          <Route element={<DaoWrapper />}>
+          <Route element={<MSWalletWrapper />}>
             <Route path="/create" element={<CreateMSWallet />} />
           </Route>
           <Route path="/multisig-wallets/:network/:msWallet">
-            <Route element={<DaoWrapper />}>
+            <Route element={<MSWalletWrapper />}>
               <Route path="dashboard" element={<DashboardPage />} />
               {/* Redirects the user to the dashboard page by default if no msWallet-specific page is specified. */}
               <Route index element={<Navigate to={'dashboard'} replace />} />
@@ -110,26 +110,6 @@ function App() {
   );
 }
 
-const NewSettingsWrapper: React.FC = () => {
-  const formMethods = useForm({
-    mode: 'onChange',
-    defaultValues: {
-      links: [{name: '', url: ''}],
-      startSwitch: 'now',
-      durationSwitch: 'duration',
-      durationDays: '1',
-      durationHours: '0',
-      durationMinutes: '0',
-    },
-  });
-
-  return (
-    <FormProvider {...formMethods}>
-      <Outlet />
-    </FormProvider>
-  );
-};
-
 const ProposalDetailsWrapper: React.FC = () => (
   <ProposalTransactionProvider>
     <ProposalPage />
@@ -152,7 +132,7 @@ const ExploreWrapper: React.FC = () => (
   </>
 );
 
-const DaoWrapper: React.FC = () => {
+const MSWalletWrapper: React.FC = () => {
   // const {data: walletDetails} = useMSWalletDetailsQuery();
 
   // using isOpen to conditionally render TransactionDetail so that

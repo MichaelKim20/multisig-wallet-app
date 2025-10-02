@@ -70,7 +70,7 @@ export const getUserFriendlyWalletLabel = (
     case '':
       return '';
     case constants.AddressZero:
-      return t('labels.daoTreasury');
+      return t('labels.msWalletTreasury');
 
     default:
       return value;
@@ -212,7 +212,6 @@ export function toDisplayEns(ensName?: string) {
   if (!ensName.includes('.msWallet.eth')) return `${ensName}.msWallet.eth`;
   return ensName;
 }
-
 
 export function getWCPayableAmount(
   t: TFunction,

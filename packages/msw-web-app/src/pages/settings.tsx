@@ -49,7 +49,7 @@ const Settings: React.FC = () => {
         </DescriptionListContainer>
 
         {/* DAO DETAILS SECTION */}
-        <DescriptionListContainer title={t('labels.review.daoMetadata')}>
+        <DescriptionListContainer title={t('labels.review.msWalletMetadata')}>
           <Dl>
             <Dt>{t('labels.logo')}</Dt>
           </Dl>
@@ -76,7 +76,7 @@ export const SettingsWrapper: React.FC = ({children}) => {
 
   return (
     <PageWrapper
-      title={t('labels.daoSettings')}
+      title={t('labels.msWalletSettings')}
       // TODO add correct description once available in designs [VR 17-01-2023]
       description="Review your Multisig wallet's settings"
       customBody={<Layout>{children}</Layout>}

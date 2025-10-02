@@ -1,12 +1,37 @@
-import {ButtonIcon, Dropdown, IconClose, IconMenu} from 'msw-ui-components';
+import {ButtonIcon, Dropdown, IconClose, IconMenu, IconCommunity, IconDashboard, IconGovernance, IconSettings} from 'msw-ui-components';
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import {useTranslation} from 'react-i18next';
 
 import NavLink from 'components/navLink';
-import {NAV_LINKS_DATA} from 'utils/constants';
+import {Dashboard, Community, Governance, Settings} from '../../utils/paths';
 
 export const NavlinksDropdown: React.FC = () => {
   const [showCrumbMenu, setShowCrumbMenu] = useState(false);
+  const {t} = useTranslation();
+
+  const navLinksData = [
+    {
+      label: t('navLinks.dashboard'),
+      path: Dashboard,
+      icon: IconDashboard,
+    },
+    {
+      label: t('navLinks.governance'),
+      path: Governance,
+      icon: IconGovernance,
+    },
+    {
+      label: t('navLinks.community'),
+      path: Community,
+      icon: IconCommunity,
+    },
+    {
+      label: t('navLinks.settings'),
+      path: Settings,
+      icon: IconSettings,
+    },
+  ];
 
   return (
     <StyledDropdown
@@ -23,7 +48,7 @@ export const NavlinksDropdown: React.FC = () => {
         />
       }
       sideOffset={8}
-      listItems={NAV_LINKS_DATA.map(d => ({
+      listItems={navLinksData.map(d => ({
         component: <NavLink caller="dropdown" data={d} />,
         // Navlink component already takes care of callback. Eventually we
         // should probably make this optional on the dropdown component.

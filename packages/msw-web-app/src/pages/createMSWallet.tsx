@@ -75,7 +75,7 @@ const CreateMSWallet: React.FC = () => {
    *             Step Validation States            *
    *************************************************/
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const daoMetadataIsValid = useMemo(() => {
+  const msWalletMetadataIsValid = useMemo(() => {
     // required fields not dirty
     if (!walletName) return false;
 
@@ -115,8 +115,8 @@ const CreateMSWallet: React.FC = () => {
     <FormProvider {...formMethods}>
       <CreateMSWalletProvider>
         <FullScreenStepper
-          wizardProcessName={t('createDAO.title')}
-          navLabel={t('createDAO.title')}
+          wizardProcessName={t('createMSWallet.title')}
+          navLabel={t('createMSWallet.title')}
           returnPath={Landing}
           processType="DaoCreation"
         >
@@ -125,7 +125,7 @@ const CreateMSWallet: React.FC = () => {
             hideWizard
             customHeader={
               <OverviewMSWalletHeader
-                navLabel={t('createDAO.title')}
+                navLabel={t('createMSWallet.title')}
                 returnPath={Landing}
               />
             }
@@ -134,8 +134,8 @@ const CreateMSWallet: React.FC = () => {
             <OverviewMSWalletStep />
           </Step>
           <Step
-            wizardTitle={t('createDAO.step1.title')}
-            wizardDescription={htmlIn(t)('createDAO.step1.description')}
+            wizardTitle={t('createMSWallet.step1.title')}
+            wizardDescription={htmlIn(t)('createMSWallet.step1.description')}
             onNextButtonClicked={next =>
               handleNextButtonTracking(next, '1_select_blockchain', {
                 network: formMethods.getValues('blockchain')?.network,
@@ -145,9 +145,9 @@ const CreateMSWallet: React.FC = () => {
             <SelectChain />
           </Step>
           <Step
-            wizardTitle={t('createDAO.step2.title')}
-            wizardDescription={htmlIn(t)('createDAO.step2.description')}
-            isNextButtonDisabled={!daoMetadataIsValid}
+            wizardTitle={t('createMSWallet.step2.title')}
+            wizardDescription={htmlIn(t)('createMSWallet.step2.description')}
+            isNextButtonDisabled={!msWalletMetadataIsValid}
             onNextButtonClicked={next =>
               handleNextButtonTracking(next, '2_define_metadata', {
                 dao_name: formMethods.getValues('walletName'),
@@ -158,9 +158,9 @@ const CreateMSWallet: React.FC = () => {
             <DefineMetadata />
           </Step>
           <Step
-            wizardTitle={t('createDAO.step3.title')}
+            wizardTitle={t('createMSWallet.step3.title')}
             wizardDescription={htmlIn(t)(
-              'createDAO.step3.authorisedWalletsSubtitle'
+              'createMSWallet.step3.authorisedWalletsSubtitle'
             )}
             isNextButtonDisabled={!daoSetupCommunityIsValid}
             onNextButtonClicked={next =>
@@ -172,8 +172,8 @@ const CreateMSWallet: React.FC = () => {
             <SetupCommunity />
           </Step>
           <Step
-            wizardTitle={t('createDAO.step4.title')}
-            wizardDescription={htmlIn(t)('createDAO.step4.description')}
+            wizardTitle={t('createMSWallet.step4.title')}
+            wizardDescription={htmlIn(t)('createMSWallet.step4.description')}
             isNextButtonDisabled={!daoConfigureCommunityIsValid}
             onNextButtonClicked={next =>
               handleNextButtonTracking(next, '4_configure_governance', {

@@ -13,7 +13,7 @@ const MsWalletMetadata: React.FC = () => {
 
   return (
     <Controller
-      name="reviewCheck.daoMetadata"
+      name="reviewCheck.msWalletMetadata"
       control={control}
       defaultValue={false}
       rules={{
@@ -21,9 +21,9 @@ const MsWalletMetadata: React.FC = () => {
       }}
       render={({field: {onChange, value}}) => (
         <DescriptionListContainer
-          title={t('labels.review.daoMetadata')}
+          title={t('labels.review.msWalletMetadata')}
           onEditClick={() => setStep(3)}
-          checkBoxErrorMessage={t('createDAO.review.acceptContent')}
+          checkBoxErrorMessage={t('createMSWallet.review.acceptContent')}
           checkedState={
             value ? 'active' : reviewCheckError ? 'error' : 'default'
           }

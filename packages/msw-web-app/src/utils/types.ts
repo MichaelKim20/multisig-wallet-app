@@ -71,7 +71,7 @@ export type TokenWithMarketData = TokenWithMetadata & {
   marketData?: MarketData;
 };
 
-/** Token populated with DAO treasury information; final iteration to be displayed */
+/** Token populated with Multisig Wallet treasury information; final iteration to be displayed */
 export type VaultToken = TokenWithMarketData & {
   treasurySharePercentage?: number;
 };
@@ -162,11 +162,11 @@ export type DetailedProposal = MultisigProposal;
 export type WithdrawProposal = DetailedProposal & {
   tokenAddress: string;
   tokenDecimals: number;
-  tokenSymbol:string;
+  tokenSymbol: string;
   tokenName: string;
   amount: number;
   to: string;
-} ;
+};
 export type ProposalListItem = MultisigProposalListItem;
 export type SupportedProposals = DetailedProposal | ProposalListItem;
 
@@ -174,7 +174,7 @@ export type SupportedVotingSettings = MultisigVotingSettings | VotingSettings;
 export type MSWSetting = {
   minApprovals: number;
   onlyListed: boolean;
-}
+};
 
 /* ACTION TYPES ============================================================= */
 
@@ -213,7 +213,7 @@ export type ActionsTypes =
   | 'add_address'
   | 'remove_address'
   | 'withdraw_assets'
-  | 'modify_multisig_voting_settings'
+  | 'modify_multisig_voting_settings';
 
 export type ActionWithdraw = {
   amount: number;

@@ -1,10 +1,4 @@
-import {
-  ButtonGroup,
-  ButtonText,
-  IconChevronDown,
-  Option,
-  Spinner,
-} from 'msw-ui-components';
+import {ButtonText, IconChevronDown, Spinner} from 'msw-ui-components';
 import {UseInfiniteQueryResult} from '@tanstack/react-query';
 import React, {useEffect, useMemo, useState} from 'react';
 import {useTranslation} from 'react-i18next';
@@ -12,45 +6,29 @@ import {generatePath, useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 
 import {WalletCard} from '../../components/walletCard';
-import {useFavoritedDaosInfiniteQuery} from 'hooks/useFavoritedDaos';
 import {
   AugmentedDaoListItem,
-  ExploreFilter,
-  EXPLORE_FILTER,
   useMSWalletsInfiniteQuery,
 } from 'hooks/useMSWallets';
 import {useWallet} from 'hooks/useWallet';
 import {getSupportedNetworkByChainId, SupportedChainID} from 'utils/constants';
 import {Dashboard} from 'utils/paths';
 
-export function isExploreFilter(
-  filterValue: string
-): filterValue is ExploreFilter {
-  return EXPLORE_FILTER.some(ef => ef === filterValue);
-}
-
-export const DaoExplorer = () => {
+export const WalletExplorer = () => {
   const {t} = useTranslation();
   const navigate = useNavigate();
   const {isConnected, address} = useWallet();
 
   // conditional api queries
-  const daosApi = useMSWalletsInfiniteQuery(
-    address || '',
-    true,
-    {limit: 4}
-  );
+  const msWalletAPI = useMSWalletsInfiniteQuery(address || '', true, {
+    limit: 4,
+  });
 
   // resulting api response
-  const exploreDaosApi = useMemo(
-    () =>
-      (daosApi) as UseInfiniteQueryResult<
-        AugmentedDaoListItem,
-        unknown
-      >,
-    [address, daosApi]
+  const exploreMSWalletAPI = useMemo(
+    () => msWalletAPI as UseInfiniteQueryResult<AugmentedDaoListItem, unknown>,
+    [address, msWalletAPI]
   );
-
 
   /*************************************************
    *             Callbacks and Handlers            *
@@ -75,10 +53,10 @@ export const DaoExplorer = () => {
           <Title>{t('explore.explorer.title')}</Title>
         </HeaderWrapper>
         <CardsWrapper>
-          {exploreDaosApi.isLoading ? (
+          {exploreMSWalletAPI.isLoading ? (
             <Spinner size="default" />
           ) : (
-            exploreDaosApi.data?.pages?.map(msWallet => (
+            exploreMSWalletAPI.data?.pages?.map(msWallet => (
               <WalletCard
                 key={msWallet.address}
                 address={msWallet.address}
@@ -96,13 +74,14 @@ export const DaoExplorer = () => {
           )}
         </CardsWrapper>
       </MainContainer>
-      {exploreDaosApi.hasNextPage && (
+      {exploreMSWalletAPI.hasNextPage && (
         <div>
           <ButtonText
             css={{}}
             label={t('explore.explorer.showMore')}
             iconRight={
-              exploreDaosApi.isFetching && exploreDaosApi.isFetchingNextPage ? (
+              exploreMSWalletAPI.isFetching &&
+              exploreMSWalletAPI.isFetchingNextPage ? (
                 <Spinner size="xs" />
               ) : (
                 <IconChevronDown />
@@ -110,7 +89,7 @@ export const DaoExplorer = () => {
             }
             bgWhite
             mode="ghost"
-            onClick={() => exploreDaosApi.fetchNextPage()}
+            onClick={() => exploreMSWalletAPI.fetchNextPage()}
           />
         </div>
       )}

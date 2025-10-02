@@ -44,7 +44,6 @@ const ConfigureWithdrawForm: React.FC<ConfigureWithdrawFormProps> = ({
   actionIndex,
 }) => {
   const {t} = useTranslation();
-  // const client = useApolloClient();
   const {open} = useGlobalModalContext();
   const {network} = useNetwork();
   const {address} = useWallet();
@@ -122,7 +121,6 @@ const ConfigureWithdrawForm: React.FC<ConfigureWithdrawFormProps> = ({
                 provider,
                 nativeCurrency
               ),
-          // fetchTokenData(tokenAddress, client, network, tokenSymbol),
           getTokenInfo(tokenAddress, provider, nativeCurrency),
         ]);
 
@@ -130,7 +128,10 @@ const ConfigureWithdrawForm: React.FC<ConfigureWithdrawFormProps> = ({
         if (tokenInfo) {
           setValue(`actions.${actionIndex}.tokenName`, tokenInfo.name);
           setValue(`actions.${actionIndex}.tokenSymbol`, tokenInfo.symbol);
-          setValue(`actions.${actionIndex}.tokenDecimals`, Number(tokenInfo.decimals));
+          setValue(
+            `actions.${actionIndex}.tokenDecimals`,
+            Number(tokenInfo.decimals)
+          );
         }
         setValue(`actions.${actionIndex}.tokenBalance`, balance);
       } catch (error) {
@@ -281,9 +282,7 @@ const ConfigureWithdrawForm: React.FC<ConfigureWithdrawFormProps> = ({
       const recipient = new Web3Address(provider, value.address, value.ensName);
 
       // withdrawing to DAO
-      if (
-        recipient.address === walletDetails?.address
-      )
+      if (recipient.address === walletDetails?.address)
         return 'Cant withdraw to your own address';
 
       return validateWeb3Address(recipient, t('errors.required.recipient'), t);

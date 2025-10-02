@@ -8,9 +8,6 @@ import {InfiniteData, useInfiniteQuery} from '@tanstack/react-query';
 
 import {useClient} from './useClient';
 
-export const EXPLORE_FILTER = ['favorite', 'newest', 'popular'] as const;
-export type ExploreFilter = typeof EXPLORE_FILTER[number];
-
 export type AugmentedDaoListItem = WalletDetails;
 
 const DEFAULT_QUERY_PARAMS = {
@@ -57,11 +54,9 @@ export const useMSWalletsInfiniteQuery = (
     limit = DEFAULT_QUERY_PARAMS.limit,
   }: Partial<Pick<QueryOption, 'direction' | 'limit'>> = {}
 ) => {
-  // const {address} = useWallet();
   const {client} = useClient();
 
   return useInfiniteQuery({
-    queryKey: ['infiniteDaos'],
     queryFn: async ({pageParam = 0}) => {
       const skip = limit * pageParam;
       return fetchMSWallets(client, address, {skip, limit, direction});

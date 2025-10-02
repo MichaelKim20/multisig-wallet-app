@@ -42,7 +42,7 @@ const ProtectedRoute: React.FC = () => {
   }, [navigate]);
 
   const gateMultisigProposal = useCallback(() => {
-    // if ((daoSettings as MultisigVotingSettings).onlyListed === false) {
+    // if ((msWalletSettings as MultisigVotingSettings).onlyListed === false) {
     //   close('gating');
     // } else
     if (

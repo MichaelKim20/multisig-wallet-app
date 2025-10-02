@@ -35,17 +35,17 @@ export const GoLiveHeader: React.FC = () => {
     <div className="tablet:p-3 desktop:p-6 px-2 pt-2 desktop:pt-3 pb-3 bg-ui-0 tablet:rounded-xl">
       <div className="desktop:hidden">
         <Breadcrumb
-          crumbs={{label: t('createDAO.title'), path: Landing}}
+          crumbs={{label: t('createMSWallet.title'), path: Landing}}
           onClick={clickHandler}
         />
       </div>
       <div className="flex justify-between">
         <div className="pt-3 w-full">
           <h1 className="text-3xl font-bold text-ui-800">
-            {t('createDAO.review.title')}
+            {t('createMSWallet.review.title')}
           </h1>
           <p className="mt-2 text-lg text-ui-600">
-            {t('createDAO.review.description')}
+            {t('createMSWallet.review.description')}
           </p>
         </div>
         <ImageContainer src={goLive} />
@@ -63,7 +63,7 @@ const GoLive: React.FC = () => {
       <MsWalletMetadata />
       <Community />
       <Governance />
-      <AlertCard title={t('createDAO.review.daoUpdates')} />
+      <AlertCard title={t('createMSWallet.review.daoUpdates')} />
     </Container>
   );
 };
@@ -110,7 +110,7 @@ export const GoLiveFooter: React.FC = () => {
           css={{}}
           size="large"
           iconRight={<IconChevronRight />}
-          label={t('createDAO.review.title')}
+          label={t('createMSWallet.review.title')}
           onClick={publishDao}
           disabled={IsButtonDisabled()}
         />

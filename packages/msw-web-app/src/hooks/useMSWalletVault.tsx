@@ -11,7 +11,7 @@ import {useMSWalletDetailsQuery} from './useMSWalletDetails';
  * to their corresponding USD market values, and calculating their treasury share percentage.
  * @param options.filter TimeFilter for market data
  * @param options.interval Refresh interval in milliseconds
- * @returns A list of transfers and of tokens in the DAO treasury,
+ * @returns A list of transfers and of tokens in the Multisig Wallet treasury,
  * current USD sum value of all assets, and the price change in USD based on the filter.
  */
 export const useMSWalletVault = (

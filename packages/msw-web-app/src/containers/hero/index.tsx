@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {useTranslation} from 'react-i18next';
 import {GridLayout} from 'components/layout';
+import {LanguageSelector} from '../../components/languageSelector';
 
 function Hero() {
   const {t} = useTranslation();
@@ -13,6 +14,9 @@ function Hero() {
             <Title>{t('explore.hero.title')}</Title>
             <Subtitle>{t('explore.hero.subtitle1')}</Subtitle>
           </ContentWrapper>
+          <LanguageSelectorWrapper>
+            <LanguageSelector />
+          </LanguageSelectorWrapper>
         </Wrapper>
       </GridLayout>
     </Container>
@@ -21,7 +25,7 @@ function Hero() {
 
 const Container = styled.div.attrs({
   className:
-    'bg-primary-400 h-56 -mt-10 pt-10  desktop:h-67 desktop:pt-12 desktop:-mt-12 overflow-hidden',
+    'bg-primary-400 h-48 -mt-10 pt-8 desktop:h-56 desktop:pt-10 desktop:-mt-12 overflow-visible',
 })``;
 
 const Wrapper = styled.div.attrs({
@@ -30,7 +34,7 @@ const Wrapper = styled.div.attrs({
 })``;
 
 const ContentWrapper = styled.div.attrs({
-  className: 'desktop:space-y-0.95 space-y-1 max-w-lg pt-4.5 desktop:pt-10',
+  className: 'desktop:space-y-0.75 space-y-0.75 max-w-lg pt-3 desktop:pt-6',
 })``;
 
 const Title = styled.h1.attrs({
@@ -44,6 +48,10 @@ const Title = styled.h1.attrs({
 const Subtitle = styled.h3.attrs({
   className:
     'text-ui-0 ft-text-lg font-normal text-center desktop:text-left leading-3 desktop:leading-3.75',
+})``;
+
+const LanguageSelectorWrapper = styled.div.attrs({
+  className: 'absolute top-3 right-4 desktop:top-5 desktop:right-6',
 })``;
 
 export default Hero;

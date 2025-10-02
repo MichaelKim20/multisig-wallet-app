@@ -25,7 +25,7 @@ const MultisigSettings: React.FC<IPluginSettings> = ({walletDetails}) => {
     ''
   );
 
-  const daoSettings = votingSettings as MultisigVotingSettings;
+  const msWalletSettings = votingSettings as MultisigVotingSettings;
 
   return (
     <div className="space-y-5">
@@ -33,14 +33,14 @@ const MultisigSettings: React.FC<IPluginSettings> = ({walletDetails}) => {
       <DescriptionListContainer title={t('navLinks.community')}>
         <Dl>
           <Dt>{t('labels.review.eligibleVoters')}</Dt>
-          <Dd>{t('createDAO.step3.multisigMembers')}</Dd>
+          <Dd>{t('createMSWallet.step3.multisigMembers')}</Dd>
         </Dl>
 
         <Dl>
           <Dt>{t('labels.members')}</Dt>
           <Dd>
             <Link
-              label={t('createDAO.review.distributionLink', {
+              label={t('createMSWallet.review.distributionLink', {
                 count: daoMembers?.members?.length,
               })}
               onClick={() =>
@@ -61,18 +61,18 @@ const MultisigSettings: React.FC<IPluginSettings> = ({walletDetails}) => {
         <Dl>
           <Dt>{t('labels.minimumApproval')}</Dt>
           <Dd>
-            {`${daoSettings?.minApprovals} of ${daoMembers?.members.length} ${t(
-              'labels.authorisedWallets'
-            )}`}
+            {`${msWalletSettings?.minApprovals} of ${
+              daoMembers?.members.length
+            } ${t('labels.authorisedWallets')}`}
           </Dd>
         </Dl>
 
         <Dl>
           <Dt>{t('labels.proposalCreation')}</Dt>
           <Dd>
-            {daoSettings?.onlyListed
-              ? t('createDAO.step3.multisigMembers')
-              : t('createDAO.step3.eligibility.anyWallet.title')}
+            {msWalletSettings?.onlyListed
+              ? t('createMSWallet.step3.multisigMembers')
+              : t('createMSWallet.step3.eligibility.anyWallet.title')}
           </Dd>
         </Dl>
       </DescriptionListContainer>

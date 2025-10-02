@@ -2,18 +2,22 @@ import React, {useMemo, useCallback} from 'react';
 import {Carousel as ReactResponsiveCarousel} from 'react-responsive-carousel';
 import styled from 'styled-components';
 import {useNavigate} from 'react-router-dom';
+import {useTranslation} from 'react-i18next';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 import CTACard from 'components/ctaCard';
-import {CTACards} from 'components/ctaCard/data';
 import useScreen from 'hooks/useScreen';
 import {useWallet} from 'hooks/useWallet';
 import {trackEvent} from 'services/analytics';
+import {CreateMSWallet} from 'utils/paths';
+
+import createMSWalletImg from '../../public/createMSWallet.svg';
 
 const Carousel: React.FC = () => {
   const {isDesktop} = useScreen();
   const navigate = useNavigate();
   const {methods, isConnected} = useWallet();
+  const {t} = useTranslation();
 
   // TODO
   // this prevents the user from entering the creation
@@ -48,9 +52,20 @@ const Carousel: React.FC = () => {
     [isConnected, methods, navigate]
   );
 
+  const ctaCards = useMemo(() => [
+    {
+      actionAvailable: true,
+      actionLabel: t('cta.create.actionLabel'),
+      path: CreateMSWallet,
+      imgSrc: createMSWalletImg,
+      subtitle: t('cta.create.description'),
+      title: t('cta.create.title'),
+    },
+  ], [t]);
+
   const ctaList = useMemo(
     () =>
-      CTACards.map(card => (
+      ctaCards.map(card => (
         <CTACard
           key={card.title}
           {...card}
@@ -58,7 +73,7 @@ const Carousel: React.FC = () => {
           onClick={handleCTAClick}
         />
       )),
-    [handleCTAClick]
+    [ctaCards, handleCTAClick]
   );
 
   if (isDesktop) {

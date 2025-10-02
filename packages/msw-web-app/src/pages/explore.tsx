@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 import {GridLayout} from 'components/layout';
 import Carousel from 'containers/carousel';
-import {DaoExplorer} from '../containers/msWalletExplorer';
+import {WalletExplorer} from '../containers/msWalletExplorer';
 import Hero from 'containers/hero';
 import {useNetwork} from 'context/network';
 import {translateToNetworkishName} from 'utils/library';
@@ -35,7 +35,7 @@ const Explore: React.FC = () => {
       <GridLayout>
         <ContentWrapper>
           <Carousel />
-          <DaoExplorer />
+          <WalletExplorer />
         </ContentWrapper>
       </GridLayout>
     </>

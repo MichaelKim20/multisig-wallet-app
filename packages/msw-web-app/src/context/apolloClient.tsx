@@ -3,7 +3,6 @@
 import {useEffect, useState} from 'react';
 import {
   defaultChainID,
-  FAVORITE_WALLETS_KEY,
   PENDING_EXECUTION_KEY,
   PENDING_MULTISIG_EXECUTION_KEY,
   PENDING_MULTISIG_PROPOSALS_KEY,
@@ -78,11 +77,6 @@ export type NavigationMSWallet = Omit<
   creationDate?: Date;
   chain: SupportedChainID;
 };
-const favoriteMSWallets = JSON.parse(
-  localStorage.getItem(FAVORITE_WALLETS_KEY) || '[]'
-);
-export const favoriteMSWalletsVar =
-  makeVar<Array<NavigationMSWallet>>(favoriteMSWallets);
 
 export const selectedMSWalletVar = makeVar<NavigationMSWallet>({
   address: '',

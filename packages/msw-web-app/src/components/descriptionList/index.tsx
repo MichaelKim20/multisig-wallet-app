@@ -19,13 +19,6 @@ export type DescriptionListProps = {
   tagLabel?: string;
 };
 
-// TODO: This needs to be reworked, as it currently leads to nested DL (DLs get
-// passed in as children to this component, where they get wrapped in DLs
-// again). [VR 17-01-2023]
-
-// Also, the sizing is hardcoded and will fail when a term is less than 30% of
-// container size. [FF 11-02-2023]
-
 export const DescriptionListContainer: React.FC<DescriptionListProps> = ({
   title,
   children,
@@ -65,7 +58,7 @@ export const DescriptionListContainer: React.FC<DescriptionListProps> = ({
         <div className="ml-auto space-y-1.5 tablet:w-3/4">
           <div className="tablet:flex">
             <CheckboxListItem
-              label={t('createDAO.review.valuesCorrect')}
+              label={t('createMSWallet.review.valuesCorrect')}
               multiSelect
               onClick={() => onChecked?.()}
               type={checkedState}

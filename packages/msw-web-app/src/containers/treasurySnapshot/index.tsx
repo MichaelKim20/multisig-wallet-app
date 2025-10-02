@@ -156,7 +156,7 @@ const TreasurySnapshot: React.FC<Props> = ({
         //   style: 'currency',
         //   currency: 'USD',
         // }).format(totalAssetValue)}
-        value={t('labels.treasuryValue') + 's'}
+        value={t('labels.treasuryValue')}
         label=""
         // label={t('labels.treasuryValue')}
         buttonText={t('modal.deposit.headerTitle')}

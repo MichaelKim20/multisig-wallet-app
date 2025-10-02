@@ -6,7 +6,6 @@ import {generatePath, useNavigate} from 'react-router-dom';
 
 import PublishModal from 'containers/transactionModals/publishModal';
 import {useClient} from 'hooks/useClient';
-import {useaddFavoriteMSWalletMutation} from 'hooks/useFavoritedDaos';
 import {usePollGasFee} from 'hooks/usePollGasfee';
 import {useWallet} from 'hooks/useWallet';
 import {CreateMSWalletFormData} from '../pages/createMSWallet';
@@ -40,8 +39,6 @@ const CreateMSWalletProvider: React.FC = ({children}) => {
   const {t} = useTranslation();
   const {getValues} = useFormContext<CreateMSWalletFormData>();
   const {client} = useClient();
-
-  const addFavoriteMSWalletMutation = useaddFavoriteMSWalletMutation();
 
   const [creationProcessState, setCreationProcessState] =
     useState<TransactionState>();
@@ -205,27 +202,6 @@ const CreateMSWalletProvider: React.FC = ({children}) => {
             setMSWalletCreationData(undefined);
             setCreationProcessState(TransactionState.SUCCESS);
             setDaoAddress(step.address.toLowerCase());
-
-            try {
-              await Promise.all([
-                addFavoriteMSWalletMutation.mutateAsync({
-                  msWallet: {
-                    address: step.address.toLocaleLowerCase(),
-                    chain: CHAIN_METADATA[network].id,
-                    metadata: {
-                      name: msWalletCreationData.name,
-                      description: msWalletCreationData.description,
-                    },
-                  },
-                }),
-              ]);
-            } catch (error) {
-              console.warn(
-                'Error favoriting and adding newly created DAO to cache',
-                error
-              );
-            }
-            break;
         }
       }
     } catch (err) {

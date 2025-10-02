@@ -11,6 +11,7 @@ import {generatePath, useNavigate, useParams} from 'react-router-dom';
 import styled from 'styled-components';
 
 import {WalletSelector} from '../../components/walletSelector';
+import {LanguageSelector} from '../../components/languageSelector';
 import {Container} from 'components/layout';
 import NavLinks from 'components/navLinks';
 import ExitProcessMenu, {ProcessType} from 'containers/exitProcessMenu';
@@ -121,6 +122,7 @@ const DesktopNav: React.FC<DesktopNavProp> = props => {
         </Content>
 
         <div className="flex gap-2">
+          <LanguageSelector />
           <ButtonWallet
             src={address}
             onClick={props.onWalletClick}

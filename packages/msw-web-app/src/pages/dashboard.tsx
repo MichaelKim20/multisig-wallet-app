@@ -1,4 +1,4 @@
-import {HeaderDao} from 'msw-ui-components';
+import {HeaderWallet} from 'msw-ui-components';
 import {withTransaction} from '@elastic/apm-rum-react';
 import React, {useCallback, useMemo, useState} from 'react';
 import {useTranslation} from 'react-i18next';
@@ -12,11 +12,6 @@ import {useAlertContext} from 'context/alert';
 import {NavigationMSWallet} from 'context/apolloClient';
 import {useNetwork} from 'context/network';
 import {useMSWalletQuery} from 'hooks/useMSWalletDetails';
-import {
-  useaddFavoriteMSWalletMutation,
-  useFavoritedDaosQuery,
-  useremoveFavoriteMSWalletMutation,
-} from 'hooks/useFavoritedDaos';
 import useScreen from 'hooks/useScreen';
 import {CHAIN_METADATA, SupportedChainID} from 'utils/constants';
 import {formatDate} from 'utils/date';
@@ -36,41 +31,12 @@ const Dashboard: React.FC = () => {
   const {open} = useGlobalModalContext();
 
   const [pollInterval, setPollInterval] = useState(0);
-  // favoring DAOS
-  const addFavoriteMSWalletMutation = useaddFavoriteMSWalletMutation(() =>
-    alert(t('alert.chip.favorited'))
-  );
-
-  const removeFavoriteMSWalletMutation = useremoveFavoriteMSWalletMutation(() =>
-    alert(t('alert.chip.unfavorite'))
-  );
-
-  const {data: favoritedDaos, isLoading: favoritedDaosLoading} =
-    useFavoritedDaosQuery();
-
   // live DAO
   const {
     data: walletDetail,
     isLoading: walletDetailLoading,
     isSuccess,
   } = useMSWalletQuery(multisigWalletAddress, pollInterval);
-
-  const favoriteMSWalletMatchPredicate = useCallback(
-    (favoriteDao: NavigationMSWallet) => {
-      return (
-        favoriteDao.address.toLowerCase() ===
-          walletDetail?.address.toLowerCase() &&
-        favoriteDao.chain === CHAIN_METADATA[network].id
-      );
-    },
-    [walletDetail?.address, network]
-  );
-
-  const isFavoritedMSWallet = useMemo(() => {
-    if (walletDetail?.address && favoritedDaos)
-      return Boolean(favoritedDaos.some(favoriteMSWalletMatchPredicate));
-    else return false;
-  }, [favoriteMSWalletMatchPredicate, favoritedDaos, walletDetail?.address]);
 
   /*************************************************
    *                    Hooks                      *
@@ -86,33 +52,10 @@ const Dashboard: React.FC = () => {
     alert(t('alert.chip.inputCopied'));
   }, [alert, multisigWalletAddress, network, t]);
 
-  const handleFavoriteClick = useCallback(
-    async (msWallet: NavigationMSWallet) => {
-      try {
-        if (isFavoritedMSWallet) {
-          await removeFavoriteMSWalletMutation.mutateAsync({msWallet});
-        } else {
-          await addFavoriteMSWalletMutation.mutateAsync({msWallet});
-        }
-      } catch (error) {
-        const action = isFavoritedMSWallet
-          ? 'removing DAO from favorites'
-          : 'adding DAO to favorites';
-
-        console.error(`Error ${action}`, error);
-      }
-    },
-    [
-      isFavoritedMSWallet,
-      removeFavoriteMSWalletMutation,
-      addFavoriteMSWalletMutation,
-    ]
-  );
-
   /*************************************************
    *                    Render                     *
    *************************************************/
-  if (walletDetailLoading || favoritedDaosLoading) {
+  if (walletDetailLoading) {
     return <Loading />;
   }
 
@@ -120,27 +63,16 @@ const Dashboard: React.FC = () => {
     return (
       <>
         <HeaderWrapper>
-          <HeaderDao
+          <HeaderWallet
             walletName={walletDetail.metadata.name}
-            daoUrl={`${window.location.origin}/#/multisig-wallets/${network}/${multisigWalletAddress}`}
+            url={`${window.location.origin}/#/multisig-wallets/${network}/${multisigWalletAddress}`}
             description={walletDetail.metadata.description}
             created_at={formatDate(
               walletDetail.creationDate.getTime() / 1000,
               'MMMM yyyy'
             ).toString()}
-            daoChain={CHAIN_METADATA[network].name}
-            favorited={isFavoritedMSWallet}
+            chain={CHAIN_METADATA[network].name}
             copiedOnClick={handleClipboardActions}
-            onFavoriteClick={() =>
-              handleFavoriteClick({
-                address: walletDetail.address.toLowerCase(),
-                chain: walletDetail.chain as SupportedChainID,
-                metadata: {
-                  name: walletDetail.metadata.name,
-                  description: walletDetail.metadata.description,
-                },
-              })
-            }
           />
         </HeaderWrapper>
 

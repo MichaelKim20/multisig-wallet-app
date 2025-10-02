@@ -110,23 +110,12 @@ const ProtectedRoute: React.FC = () => {
   // wallet connected and on right network, authenticate
   useEffect(() => {
     if (status === 'connected' && !isOnWrongNetwork) {
-      // if (pluginType === 'token-voting.plugin.wallet.eth') {
-      //   gateTokenBasedProposal();
-      // } else {
-      //   gateMultisigProposal();
-      // }
       gateMultisigProposal();
 
       // user has gone through login flow allow them to log out in peace
       userWentThroughLoginFlowRef.current = true;
     }
-  }, [
-    gateMultisigProposal,
-    // gateTokenBasedProposal,
-    isOnWrongNetwork,
-    // pluginType,
-    status,
-  ]);
+  }, [gateMultisigProposal, isOnWrongNetwork, status]);
 
   /*************************************************
    *                     Render                    *
@@ -136,12 +125,7 @@ const ProtectedRoute: React.FC = () => {
   return (
     <>
       {!isGatingOpen && userWentThroughLoginFlowRef.current && <Outlet />}
-      {walletDetails && (
-        <GatingMenu
-          walletDetails={walletDetails}
-          pluginType="multisig.plugin.wallet.eth"
-        />
-      )}
+      {walletDetails && <GatingMenu walletDetails={walletDetails} />}
       <LoginRequired isOpen={showLoginModal} onClose={handleCloseLoginModal} />
     </>
   );

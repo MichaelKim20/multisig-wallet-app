@@ -18,13 +18,11 @@ import {Community, ManageMembersProposal} from 'utils/paths';
 
 type Props = {
   multisigWalletAddress: string;
-  pluginType?: string;
   horizontal?: boolean;
 };
 
 export const MembershipSnapshot: React.FC<Props> = ({
   multisigWalletAddress,
-  pluginType = 'multisig.plugin.wallet.eth',
   horizontal = false,
 }) => {
   const {t} = useTranslation();
@@ -37,17 +35,8 @@ export const MembershipSnapshot: React.FC<Props> = ({
   const {
     data: {members},
     isLoading,
-  } = useMSWalletMembers(multisigWalletAddress, pluginType);
+  } = useMSWalletMembers(multisigWalletAddress);
   const totalMemberCount = members.length;
-
-  // const {data: walletDetails} = useMSWalletDetailsQuery();
-
-  // const {isDAOTokenWrapped, isTokenMintable} = useExistingToken({
-  //   daoToken,
-  //   walletDetails,
-  // });
-  //
-  const walletBased = pluginType === 'multisig.plugin.wallet.eth';
 
   const headerButtonHandler = () => {
     generatePath(ManageMembersProposal, {
@@ -68,11 +57,7 @@ export const MembershipSnapshot: React.FC<Props> = ({
           <ListItemHeader
             icon={<IconCommunity />}
             value={`${totalMemberCount} ${t('labels.members')}`}
-            label={
-              walletBased
-                ? t('explore.explorer.walletBased')
-                : t('explore.explorer.tokenBased')
-            }
+            label={t('explore.explorer.walletBased')}
             buttonText={
               // walletBased ? t('labels.manageMember') : t('labels.seeCommunity')
               ''
@@ -110,11 +95,7 @@ export const MembershipSnapshot: React.FC<Props> = ({
       <ListItemHeader
         icon={<IconCommunity />}
         value={`${totalMemberCount} ${t('labels.members')}`}
-        label={
-          walletBased
-            ? t('explore.explorer.walletBased')
-            : t('explore.explorer.tokenBased')
-        }
+        label={t('explore.explorer.walletBased')}
         buttonText={
           // walletBased ? t('labels.manageMember') : t('labels.seeCommunity')
           ''

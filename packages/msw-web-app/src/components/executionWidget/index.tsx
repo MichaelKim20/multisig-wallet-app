@@ -14,7 +14,6 @@ import {useNetwork} from 'context/network';
 import {CHAIN_METADATA} from 'utils/constants';
 import {Action} from 'utils/types';
 import {ActionsFilter} from './actionsFilter';
-import {PluginTypes} from '../../utils/aragon/types';
 
 export type ExecutionStatus =
   | 'defeated'
@@ -24,7 +23,6 @@ export type ExecutionStatus =
   | 'default';
 
 type ExecutionWidgetProps = {
-  pluginType?: PluginTypes;
   txhash?: string;
   actions?: Array<Action | undefined>;
   status?: ExecutionStatus;
@@ -38,7 +36,6 @@ export const ExecutionWidget: React.FC<ExecutionWidgetProps> = ({
   txhash,
   onAddAction,
   onExecuteClicked,
-  pluginType,
 }) => {
   const {t} = useTranslation();
 
@@ -71,7 +68,6 @@ export const ExecutionWidget: React.FC<ExecutionWidgetProps> = ({
             })}
           </Content>
           <WidgetFooter
-            pluginType={pluginType}
             status={status}
             txhash={txhash}
             onExecuteClicked={onExecuteClicked}
@@ -84,14 +80,13 @@ export const ExecutionWidget: React.FC<ExecutionWidgetProps> = ({
 
 type FooterProps = Pick<
   ExecutionWidgetProps,
-  'status' | 'txhash' | 'onExecuteClicked' | 'pluginType'
+  'status' | 'txhash' | 'onExecuteClicked'
 >;
 
 const WidgetFooter: React.FC<FooterProps> = ({
   status = 'default',
   onExecuteClicked,
   txhash,
-  pluginType,
 }) => {
   const {t} = useTranslation();
   const {network} = useNetwork();
@@ -102,20 +97,12 @@ const WidgetFooter: React.FC<FooterProps> = ({
 
   switch (status) {
     case 'defeated': {
-      return pluginType === 'multisig.plugin.wallet.eth' ? (
-        <AlertCard
-          mode="info"
-          title={t('governance.executionCard.statusMultisig.expiredTitle')}
-          helpText={t('governance.executionCard.statusMultisig.expiredDesc')}
-        />
-      ) : (
-        <AlertInline
-          label={t('governance.executionCard.status.defeated')}
-          mode={'warning'}
-        />
-      );
+      <AlertCard
+        mode="info"
+        title={t('governance.executionCard.statusMultisig.expiredTitle')}
+        helpText={t('governance.executionCard.statusMultisig.expiredDesc')}
+      />;
     }
-
     case 'executable':
       return (
         <Footer>

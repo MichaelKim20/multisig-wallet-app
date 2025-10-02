@@ -57,15 +57,15 @@ export interface WcDisconnectEvent {
 
 export async function makeClient(): Promise<WcClient> {
   const core = new Core({
-    projectId: 'a312303bfee4d9c1cdbc5e638e8aa438' || walletConnectProjectID,
+    projectId: walletConnectProjectID || '1efdbd3bc5348396d3b4140d2c11cc5f',
   });
 
   return Web3Wallet.init({
     core,
     metadata: {
-      name: 'Aragon',
-      description: 'Aragon WalletConnect',
-      url: 'https://aragon.org',
+      name: 'BOSagora',
+      description: 'BOSagora WalletConnect',
+      url: 'https://multisigwallet.bosagora.com/',
       icons: ['https://walletconnect.org/walletconnect-logo.png'],
     },
   });

@@ -4,7 +4,6 @@ import {useEffect, useState} from 'react';
 import {recalculateStatus} from 'utils/proposals';
 import {DetailedProposal, HookData, ProposalListItem} from 'utils/types';
 import {useMSWalletDetailsQuery} from './useMSWalletDetails';
-import {PluginTypes} from 'utils/aragon/types';
 import {useClient} from './useClient';
 
 /**
@@ -19,7 +18,6 @@ import {useClient} from './useClient';
  */
 export function useProposals(
   msWalletAddress: string,
-  type: PluginTypes,
   limit = 3,
   skip = 0,
   status?: ProposalStatus
@@ -35,9 +33,6 @@ export function useProposals(
 
   const {client} = useClient();
   client?.multiSigWallet.attach(msWalletAddress);
-
-  const isMultisigPlugin = type === 'multisig.plugin.wallet.eth';
-  const isTokenBasedPlugin = type === 'token-voting.plugin.wallet.eth';
 
   useEffect(() => {
     async function getDaoProposals() {
@@ -114,15 +109,7 @@ export function useProposals(
     if (msWalletAddress && client) {
       getDaoProposals();
     }
-  }, [
-    client,
-    msWalletAddress,
-    isMultisigPlugin,
-    isTokenBasedPlugin,
-    limit,
-    skip,
-    status,
-  ]);
+  }, [client, msWalletAddress, limit, skip, status]);
 
   return {data, totalCount, error, isLoading, isInitialLoading, isLoadingMore};
 }

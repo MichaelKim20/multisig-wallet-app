@@ -53,11 +53,9 @@ import {
 import {
   Action,
   ActionWithdraw,
-  DetailedProposal,
   ProposalId,
   WithdrawProposal,
 } from 'utils/types';
-import {PluginTypes} from '../utils/aragon/types';
 import {format} from 'date-fns';
 import {getFormattedUtcOffset, KNOWN_FORMATS} from '../utils/date';
 import {useWalletCanVote} from '../hooks/useWalletCanVote';
@@ -81,10 +79,7 @@ const Proposal: React.FC = () => {
     useMSWalletDetailsQuery();
   const {
     data: {members: daoMembers},
-  } = useMSWalletMembers(
-    walletDetails?.address || '',
-    'multisig.plugin.wallet.eth'
-  );
+  } = useMSWalletMembers(walletDetails?.address || '');
 
   const {data: mswSettings} = usePluginSettings(
     walletDetails?.address as string
@@ -109,7 +104,6 @@ const Proposal: React.FC = () => {
     handleSubmitVote,
     handleExecuteProposal,
     isLoading: paramsAreLoading,
-    pluginType,
     voteSubmitted,
     executionFailed,
     transactionHash,
@@ -404,7 +398,6 @@ const Proposal: React.FC = () => {
       return getProposalStatusSteps(
         t,
         proposal.status,
-        pluginType,
         new Date(proposal.createdTime.toNumber()),
         new Date(proposal.createdTime.toNumber()),
         new Date(proposal.createdTime.toNumber()),
@@ -414,7 +407,7 @@ const Proposal: React.FC = () => {
         proposal.executed ? new Date() : undefined
       );
     } else return [];
-  }, [proposal, t, pluginType, executionFailed]);
+  }, [proposal, t, executionFailed]);
 
   /*************************************************
    *                     Render                    *
@@ -501,7 +494,6 @@ const Proposal: React.FC = () => {
           />
 
           <ExecutionWidget
-            pluginType={pluginType}
             actions={decodedActions}
             status={executionStatus}
             onExecuteClicked={handleExecuteNowClicked}

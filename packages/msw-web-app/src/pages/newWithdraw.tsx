@@ -55,11 +55,6 @@ const NewWithdraw: React.FC = () => {
 
   const {data: walletDetails, isLoading: detailsLoading} =
     useMSWalletDetailsQuery();
-  // const {data: pluginSettings, isLoading: settingsLoading} = usePluginSettings(
-  //   walletDetails?.plugins[0].instanceAddress as string,
-  //   walletDetails?.plugins[0].id as PluginTypes
-  // );
-  //
   const formMethods = useForm<WithdrawFormData>({
     defaultValues,
     mode: 'onChange',

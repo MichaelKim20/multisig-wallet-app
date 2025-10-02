@@ -14,9 +14,8 @@ import {
 import {useGlobalModalContext} from 'context/globalModals';
 import {useNetwork} from 'context/network';
 import WalletIcon from 'public/wallet.svg';
-import {Governance, Dashboard} from 'utils/paths';
+import {Dashboard} from 'utils/paths';
 import {htmlIn} from 'utils/htmlIn';
-import {PluginTypes} from '../../utils/aragon/types';
 import {WalletDetails} from 'multisig-wallet-sdk-client';
 
 const TokenContainer = ({tokenName}: {tokenName: string}) => {
@@ -64,97 +63,18 @@ const WalletContainer = () => {
 };
 
 type Props = {
-  // walletDetails: walletDetails;
   walletDetails: WalletDetails;
-  pluginType: PluginTypes;
-  // daoToken?: Erc20TokenDetails | Erc20WrapperTokenDetails;
 };
 
-export const GatingMenu: React.FC<Props> = ({
-  walletDetails,
-  pluginType,
-  // daoToken,
-}) => {
+export const GatingMenu: React.FC<Props> = ({walletDetails}) => {
   const {close, isGatingOpen} = useGlobalModalContext();
   const {t} = useTranslation();
   const navigate = useNavigate();
   const {network} = useNetwork(); // TODO ensure this network is the msWallet network
-  // const {handleOpenModal} = useGovTokensWrapping();
-  const handleOpenModal = () => {};
-
-  // const {isDAOTokenWrapped} = useExistingToken({walletDetails, daoToken});
-
-  const isTokenAbsenceAlert = pluginType === 'token-voting.plugin.wallet.eth';
-
   return (
     <ModalBottomSheetSwitcher isOpen={isGatingOpen}>
       <ModalBody>
         <StyledImage src={WalletIcon} />
-        {/*{pluginType === 'token-voting.plugin.wallet.eth' ? (*/}
-        {/*  <>*/}
-        {/*    {isDAOTokenWrapped ? (*/}
-        {/*      <WrappingRequiredContainer*/}
-        {/*        tokenSymbol={*/}
-        {/*          (daoToken as Erc20WrapperTokenDetails | undefined)*/}
-        {/*            ?.underlyingToken?.symbol || ''*/}
-        {/*        }*/}
-        {/*      />*/}
-        {/*    ) : (*/}
-        {/*      <TokenContainer tokenName={daoToken?.name || ''} />*/}
-        {/*    )}*/}
-        {/*  </>*/}
-        {/*) : (*/}
-        {/*  <WalletContainer />*/}
-        {/*)}*/}
-        {/*<WalletContainer />*/}
-        {/*{isTokenAbsenceAlert && isDAOTokenWrapped ? (*/}
-        {/*  <div className="grid grid-cols-2 gap-3">*/}
-        {/*    <ButtonText*/}
-        {/*      label={t('modalAlert.wrapToken.ctaLabel')}*/}
-        {/*      onClick={() => {*/}
-        {/*        close('gating');*/}
-        {/*        handleOpenModal();*/}
-        {/*        navigate(*/}
-        {/*          generatePath(Community, {*/}
-        {/*            network,*/}
-        {/*            msWallet:*/}
-        {/*              toDisplayEns(walletDetails.ensDomain) || walletDetails.address,*/}
-        {/*          })*/}
-        {/*        );*/}
-        {/*      }}*/}
-        {/*      size="large"*/}
-        {/*    />*/}
-        {/*    <ButtonText*/}
-        {/*      label={t('modalAlert.wrapToken.cancleLabel')}*/}
-        {/*      mode="secondary"*/}
-        {/*      onClick={() => {*/}
-        {/*        navigate(*/}
-        {/*          generatePath(Governance, {*/}
-        {/*            network,*/}
-        {/*            msWallet:*/}
-        {/*              toDisplayEns(walletDetails.ensDomain) || walletDetails.address,*/}
-        {/*          })*/}
-        {/*        );*/}
-        {/*        close('gating');*/}
-        {/*      }}*/}
-        {/*      size="large"*/}
-        {/*    />*/}
-        {/*  </div>*/}
-        {/*) : (*/}
-        {/*  <ButtonText*/}
-        {/*    label={t('alert.gatingUsers.buttonLabel')}*/}
-        {/*    onClick={() => {*/}
-        {/*      navigate(*/}
-        {/*        generatePath(Governance, {*/}
-        {/*          network,*/}
-        {/*          msWallet: toDisplayEns(walletDetails.ensDomain) || walletDetails.address,*/}
-        {/*        })*/}
-        {/*      );*/}
-        {/*      close('gating');*/}
-        {/*    }}*/}
-        {/*    size="large"*/}
-        {/*  />*/}
-        {/*)}*/}
         <WalletContainer />
         <ButtonText
           css={{}}

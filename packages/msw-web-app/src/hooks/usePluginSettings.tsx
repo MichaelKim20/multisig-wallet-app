@@ -1,10 +1,6 @@
 import {useEffect, useState} from 'react';
 import {HookData, MSWSetting, SupportedVotingSettings} from 'utils/types';
-import {
-  MultisigVotingSettings,
-  PluginTypes,
-  VotingSettings,
-} from '../utils/aragon/types';
+import {MultisigVotingSettings, VotingSettings} from '../utils/aragon/types';
 import {useClient} from './useClient';
 
 export function isTokenVotingSettings(
@@ -26,12 +22,8 @@ export function isMultisigVotingSettings(
  * @param pluginAddress plugin from which proposals will be retrieved
  * @returns plugin governance settings
  */
-export function usePluginSettings(
-  pluginAddress: string,
-): HookData<MSWSetting> {
-  const [data, setData] = useState<MSWSetting>(
-    {} as MSWSetting
-  );
+export function usePluginSettings(pluginAddress: string): HookData<MSWSetting> {
+  const [data, setData] = useState<MSWSetting>({} as MSWSetting);
   const [error, setError] = useState<Error>();
   const [isLoading, setIsLoading] = useState(false);
 

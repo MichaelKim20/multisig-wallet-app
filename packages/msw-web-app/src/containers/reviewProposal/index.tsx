@@ -33,7 +33,6 @@ import {
 } from 'utils/date';
 import {getNonEmptyActions} from 'utils/proposals';
 import {SupportedVotingSettings} from 'utils/types';
-import {PluginTypes} from '../../utils/aragon/types';
 
 type ReviewProposalProps = {
   defineProposalStepNumber: number;
@@ -48,12 +47,8 @@ const ReviewProposal: React.FC<ReviewProposalProps> = ({
   const {setStep} = useFormStep();
 
   const {data: walletDetails} = useMSWalletDetailsQuery();
-  // const {id: pluginType, instanceAddress: pluginAddress} =
-  //   walletDetails?.plugins[0] || ({} as InstalledPluginListItem);
-  //
   const {data: daoSettings} = usePluginSettings(
-    walletDetails?.address as string,
-    'multisig.plugin.wallet.eth' as PluginTypes
+    walletDetails?.address as string
   );
 
   const {

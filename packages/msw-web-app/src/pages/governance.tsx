@@ -21,7 +21,6 @@ import PageEmptyState from 'containers/pageEmptyState';
 import useScreen from 'hooks/useScreen';
 import {htmlIn} from 'utils/htmlIn';
 import {ProposalStatus} from '../utils/aragon/sdk-client-common-types';
-import {PluginTypes} from '../utils/aragon/types';
 import {BigNumber} from 'ethers';
 
 const Governance: React.FC = () => {
@@ -43,7 +42,6 @@ const Governance: React.FC = () => {
     totalCount,
   } = useProposals(
     walletDetails?.address as string,
-    'multisig.plugin.wallet.eth' as PluginTypes,
     PROPOSALS_PER_PAGE,
     skip,
     filterValue !== 'All' ? filterValue : undefined

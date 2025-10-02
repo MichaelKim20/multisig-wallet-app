@@ -10,7 +10,6 @@ import {Community} from 'utils/paths';
 import {usePluginSettings} from 'hooks/usePluginSettings';
 import {IPluginSettings} from 'pages/settings';
 import {MultisigVotingSettings} from '../../../utils/aragon/sdk-client-multisig-types';
-import {PluginTypes} from '../../../utils/aragon/types';
 
 const MultisigSettings: React.FC<IPluginSettings> = ({walletDetails}) => {
   const {t} = useTranslation();
@@ -18,8 +17,7 @@ const MultisigSettings: React.FC<IPluginSettings> = ({walletDetails}) => {
   const navigate = useNavigate();
 
   const {data: votingSettings} = usePluginSettings(
-    walletDetails?.address || '',
-    'multisig.plugin.wallet.eth' as PluginTypes
+    walletDetails?.address || ''
   );
 
   const {data: daoMembers} = useMSWalletMembers(

@@ -24,10 +24,6 @@ export const useWalletCanVote = (
   const [error, setError] = useState<Error>();
   const [isLoading, setIsLoading] = useState(false);
 
-  // const isMultisigClient = pluginType === 'multisig.plugin.wallet.eth';
-  // const isTokenVotingClient = pluginType === 'token-voting.plugin.wallet.eth';
-  //
-
   useEffect(() => {
     async function fetchCanVote() {
       if (!address || !approval || executed) {

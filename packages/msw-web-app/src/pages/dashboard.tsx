@@ -182,7 +182,6 @@ const DashboardContent: React.FC<DashboardContentProps> = ({
   const {transfers, totalAssetValue} = useMSWalletVault();
   const {data: tempProposals, totalCount} = useProposals(
     multisigWalletAddress,
-    'multisig.plugin.wallet.eth',
     4
   );
 
@@ -243,7 +242,6 @@ const MobileDashboardContent: React.FC<DashboardContentProps> = ({
   const {transfers, totalAssetValue} = useMSWalletVault();
   const {data: tempProposals, totalCount} = useProposals(
     multisigWalletAddress,
-    'multisig.plugin.wallet.eth',
     4
   );
 

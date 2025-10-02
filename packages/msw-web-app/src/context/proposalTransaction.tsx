@@ -25,7 +25,6 @@ import {ProposalId} from 'utils/types';
 import {useNetwork} from './network';
 import {usePrivacyContext} from './privacyContext';
 import {useProviders} from './providers';
-import {PluginTypes} from '../utils/aragon/types';
 import {useClient} from '../hooks/useClient';
 import {NormalSteps} from 'multisig-wallet-sdk-client';
 import {Proposal} from '../utils/paths';
@@ -38,7 +37,6 @@ type ProposalTransactionContextType = {
   handleSubmitVote: (vote: VoteValues, token?: string) => void;
   handleExecuteProposal: () => void;
   pluginAddress: string;
-  pluginType: PluginTypes;
   isLoading: boolean;
   voteSubmitted: boolean;
   executeSubmitted: boolean;
@@ -81,10 +79,9 @@ const ProposalTransactionProvider: React.FC<Props> = ({children}) => {
 
   const {data: walletDetails, isLoading} = useMSWalletDetailsQuery();
 
-  const {pluginAddress, pluginType} = useMemo(() => {
+  const {pluginAddress} = useMemo(() => {
     return {
       pluginAddress: walletDetails?.address || '',
-      pluginType: 'multisig.plugin.wallet.eth' as PluginTypes,
     };
   }, [walletDetails]);
   const {client} = useClient();
@@ -179,14 +176,11 @@ const ProposalTransactionProvider: React.FC<Props> = ({children}) => {
 
       let newCache;
       let cacheKey = '';
-      // // cache multisig vote
-      if (pluginType === 'multisig.plugin.wallet.eth') {
-        newCache = {
-          date: new Date().toDateString(),
-        };
-        cacheKey = PENDING_MULTISIG_VOTES_KEY;
-        pendingMultisigApprovalsVar.set(newCache);
-      }
+      newCache = {
+        date: new Date().toDateString(),
+      };
+      cacheKey = PENDING_MULTISIG_VOTES_KEY;
+      pendingMultisigApprovalsVar.set(newCache);
 
       // add to local storage
       if (preferences?.functional) {
@@ -207,7 +201,6 @@ const ProposalTransactionProvider: React.FC<Props> = ({children}) => {
       address,
       walletDetails?.address,
       network,
-      pluginType,
       preferences?.functional,
       provider,
       tokenAddress,
@@ -296,7 +289,6 @@ const ProposalTransactionProvider: React.FC<Props> = ({children}) => {
       handleExecuteProposal,
       isLoading,
       pluginAddress,
-      pluginType,
       voteSubmitted,
       executeSubmitted,
       executionFailed,
@@ -309,9 +301,9 @@ const ProposalTransactionProvider: React.FC<Props> = ({children}) => {
       handleExecuteProposal,
       handleSubmitVote,
       pluginAddress,
-      pluginType,
       transactionHash,
       voteSubmitted,
+      walletDetails?.address,
     ]
   );
 

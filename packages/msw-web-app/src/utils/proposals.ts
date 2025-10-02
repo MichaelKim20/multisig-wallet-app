@@ -15,7 +15,6 @@ import {
 } from 'utils/types';
 import {
   CreateMajorityVotingProposalParams,
-  PluginTypes,
   ProposalMetadata,
   ProposalStatus,
 } from 'utils/aragon/types';
@@ -40,7 +39,6 @@ export function isMultisigProposal(
 export function getProposalStatusSteps(
   t: TFunction,
   status: ProposalStatus,
-  pluginType: PluginTypes,
   startDate: Date,
   endDate: Date,
   creationDate: Date,
@@ -51,9 +49,7 @@ export function getProposalStatusSteps(
 ): Array<ProgressStatusProps> {
   switch (status) {
     case ProposalStatus.ACTIVE:
-      return [
-        {...getActiveProposalStep(t, startDate, 'active')},
-      ];
+      return [{...getActiveProposalStep(t, startDate, 'active')}];
     case ProposalStatus.EXECUTED:
       if (executionDate)
         return [

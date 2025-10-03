@@ -1,0 +1,44 @@
+{
+  "name": "multisig-wallet-sdk-client-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/bosagora/multisig-wallet-sdk.git",
+  "author": "BOSagora Foundation",
+  "license": "MIT",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "00-checkWeb3": "npx ts-node scripts/00-check/checkWeb3.ts",
+    "01-getWalletsForMember": "npx ts-node scripts/01-factory/getWalletsForMember.ts",
+    "01-getWalletList": "npx ts-node scripts/01-factory/getWalletList.ts"
+  },
+  "devDependencies": {
+    "@types/chai": "^5.0.1",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^12.20.43"
+  },
+  "dependencies": {
+    "@ethersproject/abi": "^5.7.0",
+    "@ethersproject/abstract-signer": "^5.7.0",
+    "@ethersproject/bignumber": "^5.7.0",
+    "@ethersproject/bytes": "^5.7.0",
+    "@ethersproject/constants": "^5.7.0",
+    "@ethersproject/contracts": "^5.7.0",
+    "@ethersproject/experimental": "^5.7.0",
+    "@ethersproject/hash": "^5.7.0",
+    "@ethersproject/keccak256": "^5.7.0",
+    "@ethersproject/providers": "^5.7.0",
+    "@ethersproject/random": "^5.7.0",
+    "@ethersproject/wallet": "^5.7.0",
+    "assert": "^2.1.0",
+    "beautify": "^0.0.8",
+    "chai": "^4.3.7",
+    "dotenv": "^16.3.1",
+    "ethers": "^5.7.0",
+    "mocha": "10.1.0",
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5",
+    "multisig-wallet-sdk-client": "^1.1.0"
+  }
+}

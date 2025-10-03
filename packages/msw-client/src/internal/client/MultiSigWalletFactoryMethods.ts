@@ -1,12 +1,19 @@
 import { ClientCore, Context, SupportedNetwork, SupportedNetworksArray } from "../../client-common";
 import { IMultiSigWalletFactoryMethods } from "../../interface/IMultiSigWalletFactory";
-import { CreateMultiSigWallet, NormalSteps, QueryOption, SortDirection, WalletDetails } from "../../interfaces";
+import {
+    CreateMultiSigWallet,
+    NormalSteps,
+    QueryOption,
+    SortDirection,
+    SortType,
+    WalletDetails,
+} from "../../interfaces";
 import { ContractUtils, FailedCreateWallet } from "../../utils";
+import { getNetwork } from "../../utils/Utilty";
 
 import { NoProviderError, NoSignerError, UnsupportedNetworkError } from "multisig-wallet-sdk-common";
 import { MultiSigWalletFactory, MultiSigWalletFactory__factory } from "multisig-wallet-contracts-lib";
 
-import { getNetwork } from "../../utils/Utilty";
 import { Provider } from "@ethersproject/providers";
 
 export class MultiSigWalletFactoryMethods extends ClientCore implements IMultiSigWalletFactoryMethods {
@@ -166,7 +173,6 @@ export class MultiSigWalletFactoryMethods extends ClientCore implements IMultiSi
         if (!provider) throw new NoProviderError();
 
         const network = getNetwork((await provider.getNetwork()).chainId);
-        console.log(`network: ${JSON.stringify(network)}`);
         const networkName = network.name as SupportedNetwork;
         if (!SupportedNetworksArray.includes(networkName)) {
             throw new UnsupportedNetworkError(networkName);
@@ -177,23 +183,14 @@ export class MultiSigWalletFactoryMethods extends ClientCore implements IMultiSi
             provider
         );
 
-        //console.log(`getWallets account: ${this.web3.getWalletFactoryAddress()} ${account}`);
-
-        const length1 = await contract.getNumberOfWalletsForMember(account);
-        //console.log(`getWallets length: ${account} ${length1.toString()}`);
         const length = (await contract.getNumberOfWalletsForMember(account)).toNumber();
 
         const skip = option.skip !== undefined ? option.skip : 0;
         const limit = option.limit !== undefined ? option.limit : 16;
-        //console.log(`length : ${length}`);
-        //console.log(`skip : ${skip}`);
-        //console.log(`limit : ${limit}`);
-        //console.log(`direction : ${option.direction}`);
         if (option.direction === SortDirection.ASC) {
             const from = skip;
             const to = skip + limit > length ? length : skip + limit;
-            const res = to > from ? await this.getWalletsForMember(account, from, to) : [];
-            return res;
+            return to > from ? await this.getWalletsForMember(account, from, to) : [];
         } else {
             const to = length - skip;
             const last = skip + limit;
@@ -227,5 +224,55 @@ export class MultiSigWalletFactoryMethods extends ClientCore implements IMultiSi
             creationDate: new Date(res.createdTime.toNumber() * 1000),
             chain: network.chainId,
         };
+    }
+
+    public async getWalletListLength(account: string): Promise<number> {
+        const provider = this.web3.getProvider() as Provider;
+        if (!provider) throw new NoProviderError();
+
+        const network = getNetwork((await provider.getNetwork()).chainId);
+        const networkName = network.name as SupportedNetwork;
+        if (!SupportedNetworksArray.includes(networkName)) {
+            throw new UnsupportedNetworkError(networkName);
+        }
+
+        const contract: MultiSigWalletFactory = MultiSigWalletFactory__factory.connect(
+            this.web3.getWalletFactoryAddress(),
+            provider
+        );
+        return (await contract.getNumberOfWalletsForMember(account)).toNumber();
+    }
+
+    public async getWalletList(
+        account: string,
+        startIndex: number,
+        endIndex: number,
+        sortType: SortType
+    ): Promise<WalletDetails[]> {
+        const provider = this.web3.getProvider() as Provider;
+        if (!provider) throw new NoProviderError();
+
+        const network = getNetwork((await provider.getNetwork()).chainId);
+        const networkName = network.name as SupportedNetwork;
+        if (!SupportedNetworksArray.includes(networkName)) {
+            throw new UnsupportedNetworkError(networkName);
+        }
+
+        const contract: MultiSigWalletFactory = MultiSigWalletFactory__factory.connect(
+            this.web3.getWalletFactoryAddress(),
+            provider
+        );
+
+        const length = (await contract.getNumberOfWalletsForMember(account)).toNumber();
+        if (sortType === SortType.ASC) {
+            const from = startIndex;
+            const to = endIndex > length ? length : endIndex;
+            return to > from ? await this.getWalletsForMember(account, from, to) : [];
+        } else {
+            const to = length - startIndex;
+            const from = length - endIndex;
+            const res = to > from ? await this.getWalletsForMember(account, from, to) : [];
+            return res.reverse();
+        }
     }
 }

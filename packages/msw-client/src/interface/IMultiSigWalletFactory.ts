@@ -1,5 +1,5 @@
 import { IClientCore } from "../client-common";
-import { CreateMultiSigWallet, QueryOption, WalletDetails } from "../interfaces";
+import { CreateMultiSigWallet, SortType, QueryOption, WalletDetails } from "../interfaces";
 
 export interface IMultiSigWalletFactory {
     multiSigWalletFactory: IMultiSigWalletFactoryMethods;
@@ -23,4 +23,12 @@ export interface IMultiSigWalletFactoryMethods extends IClientCore {
     getWalletDetail: (wallet: string) => Promise<WalletDetails>;
 
     getWallets: (account: string, option: QueryOption) => Promise<WalletDetails[]>;
+
+    getWalletList: (
+        account: string,
+        startIndex: number,
+        endIndex: number,
+        sortType: SortType
+    ) => Promise<WalletDetails[]>;
+    getWalletListLength: (account: string) => Promise<number>;
 }

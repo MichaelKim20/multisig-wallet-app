@@ -108,3 +108,8 @@ export type QueryOption = {
     skip: number;
     direction: SortDirection;
 };
+
+export enum SortType {
+    ASC,
+    DSC,
+}

@@ -34,16 +34,6 @@ export const usePollGasFee = (
         setMaxFee(estimation?.max);
         setAverageFee(estimation?.average);
         setError(undefined);
-        // const results = await Promise.all([
-        //   estimationFunction(),
-        //   fetchTokenPrice(constants.AddressZero, network),
-        // ]);
-        //
-        // console.log('usePollGasFee > results :', results);
-        // setTokenPrice(results[1] || 0);
-        // setMaxFee(results[0]?.max);
-        // setAverageFee(results[0]?.average);
-        // setError(undefined);
       } catch (err) {
         setError(err as Error);
         setMaxFee(undefined);

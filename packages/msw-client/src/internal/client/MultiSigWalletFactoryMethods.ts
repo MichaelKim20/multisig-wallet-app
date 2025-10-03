@@ -265,12 +265,13 @@ export class MultiSigWalletFactoryMethods extends ClientCore implements IMultiSi
 
         const length = (await contract.getNumberOfWalletsForMember(account)).toNumber();
         if (sortType === SortType.ASC) {
-            const from = startIndex;
+            const from = startIndex > length ? length : startIndex;
             const to = endIndex > length ? length : endIndex;
             return to > from ? await this.getWalletsForMember(account, from, to) : [];
         } else {
-            const to = length - startIndex;
-            const from = length - endIndex;
+            const to = length - startIndex >= 0 ? length - startIndex : length;
+            const from = length - endIndex >= 0 ? length - endIndex : 0;
+            console.log(`from: ${from}, to: ${to}`);
             const res = to > from ? await this.getWalletsForMember(account, from, to) : [];
             return res.reverse();
         }

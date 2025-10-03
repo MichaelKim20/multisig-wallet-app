@@ -1,46 +1,86 @@
-import {ButtonText, IconChevronDown, Spinner} from 'msw-ui-components';
-import {UseInfiniteQueryResult} from '@tanstack/react-query';
+import {
+  ButtonGroup,
+  ButtonText,
+  IconChevronDown,
+  Option,
+  Spinner,
+} from 'msw-ui-components';
 import React, {useEffect, useMemo, useState} from 'react';
-import {useTranslation} from 'react-i18next';
+import {TFunction, useTranslation} from 'react-i18next';
 import {generatePath, useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 
-import {WalletCard} from '../../components/walletCard';
-import {
-  AugmentedDaoListItem,
-  useMSWalletsInfiniteQuery,
-} from 'hooks/useMSWallets';
+import {WalletCard} from 'components/walletCard';
 import {useWallet} from 'hooks/useWallet';
-import {getSupportedNetworkByChainId, SupportedChainID} from 'utils/constants';
+import {getSupportedNetworkByChainId} from 'utils/constants';
 import {Dashboard} from 'utils/paths';
+import {useWalletQuery, PROPOSALS_PER_PAGE} from 'hooks/useMSWalletQuery';
+import {useClient} from '../../hooks/useClient';
+import {WalletDetails} from 'multisig-wallet-sdk-client';
 
 export const WalletExplorer = () => {
   const {t} = useTranslation();
   const navigate = useNavigate();
-  const {isConnected, address} = useWallet();
+  const {address} = useWallet();
+  const {client} = useClient();
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+  const [walletList, setWalletList] = useState<Array<WalletDetails>>([]);
+  const walletQuery = useWalletQuery(address, page) || {
+    data: [],
+    error: null,
+    isLoading: false,
+  };
 
-  // conditional api queries
-  const msWalletAPI = useMSWalletsInfiniteQuery(address || '', true, {
-    limit: 4,
-  });
+  const [walletLength, setWalletLength] = useState<number>(0);
 
-  // resulting api response
-  const exploreMSWalletAPI = useMemo(
-    () => msWalletAPI as UseInfiniteQueryResult<AugmentedDaoListItem, unknown>,
-    [address, msWalletAPI]
-  );
+  useEffect(() => {
+    const fetchWalletLength = async () => {
+      if (client) {
+        try {
+          const length =
+            address !== null
+              ? await client.multiSigWalletFactory.getWalletListLength(address)
+              : 0;
+          setWalletLength(length);
+          if (length > 0) {
+            setPage(1);
+          }
+        } catch (error) {
+          console.error('지갑 개수 조회 중 오류 발생:', error);
+          setWalletLength(0);
+        }
+      }
+    };
 
-  /*************************************************
-   *             Callbacks and Handlers            *
-   *************************************************/
+    fetchWalletLength();
+  }, [client]);
 
-  const handleDaoClicked = (msWallet: string, chain: SupportedChainID) => {
-    navigate(
-      generatePath(Dashboard, {
-        network: getSupportedNetworkByChainId(chain),
-        msWallet,
-      })
-    );
+  useEffect(() => {
+    if (walletQuery.data) {
+      const newWallets = walletQuery.data as Array<WalletDetails>;
+
+      if (newWallets.length < PROPOSALS_PER_PAGE) {
+        setHasMore(false);
+      } else {
+        setHasMore(true);
+      }
+
+      if (page === 1) {
+        setWalletList(newWallets);
+      } else {
+        setWalletList(prev => {
+          const uniqueProposals = newWallets.filter(
+            newProposal => !prev.some(p => p.address === newProposal.address)
+          );
+          return [...prev, ...uniqueProposals];
+        });
+      }
+    }
+  }, [walletQuery.data, page]);
+
+  const handleLoadMore = () => {
+    setPage(prev => prev + 1);
   };
 
   /*************************************************
@@ -53,35 +93,36 @@ export const WalletExplorer = () => {
           <Title>{t('explore.explorer.title')}</Title>
         </HeaderWrapper>
         <CardsWrapper>
-          {exploreMSWalletAPI.isLoading ? (
+          {walletQuery.isLoading ? (
             <Spinner size="default" />
           ) : (
-            exploreMSWalletAPI.data?.pages?.map(msWallet => (
+            walletList.map((p: WalletDetails) => (
               <WalletCard
-                key={msWallet.address}
-                address={msWallet.address}
-                name={msWallet.metadata.name}
-                description={msWallet.metadata.description}
-                chainId={msWallet.chain}
-                onClick={() =>
-                  handleDaoClicked(
-                    msWallet.address,
-                    msWallet.chain as SupportedChainID
-                  )
-                }
+                key={p.address}
+                address={p.address}
+                name={p.metadata.name}
+                description={p.metadata.description}
+                chainId={p.chain}
+                onClick={() => {
+                  navigate(
+                    generatePath(Dashboard, {
+                      network: getSupportedNetworkByChainId(p.chain),
+                      msWallet: p.address,
+                    })
+                  );
+                }}
               />
             ))
           )}
         </CardsWrapper>
       </MainContainer>
-      {exploreMSWalletAPI.hasNextPage && (
+      {hasMore && (
         <div>
           <ButtonText
             css={{}}
             label={t('explore.explorer.showMore')}
             iconRight={
-              exploreMSWalletAPI.isFetching &&
-              exploreMSWalletAPI.isFetchingNextPage ? (
+              walletQuery.isLoading ? (
                 <Spinner size="xs" />
               ) : (
                 <IconChevronDown />
@@ -89,23 +130,13 @@ export const WalletExplorer = () => {
             }
             bgWhite
             mode="ghost"
-            onClick={() => exploreMSWalletAPI.fetchNextPage()}
+            onClick={() => handleLoadMore()}
           />
         </div>
       )}
     </Container>
   );
 };
-
-/**
- * Map explore filter to SDK DAO sort by
- * @param filter selected DAO category
- * @returns the equivalent of the SDK enum
- */
-
-const ButtonGroupContainer = styled.div.attrs({
-  className: 'flex',
-})``;
 
 const MainContainer = styled.div.attrs({
   className: 'flex flex-col space-y-2 desktop:space-y-3',

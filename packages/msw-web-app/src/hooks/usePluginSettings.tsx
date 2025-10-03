@@ -3,13 +3,6 @@ import {HookData, MSWSetting, SupportedVotingSettings} from 'utils/types';
 import {MultisigVotingSettings, VotingSettings} from '../utils/aragon/types';
 import {useClient} from './useClient';
 
-export function isTokenVotingSettings(
-  settings: SupportedVotingSettings | undefined
-): settings is VotingSettings {
-  if (!settings || Object.keys(settings).length === 0) return false;
-  return 'minDuration' in settings;
-}
-
 export function isMultisigVotingSettings(
   settings: SupportedVotingSettings | undefined
 ): settings is MultisigVotingSettings {

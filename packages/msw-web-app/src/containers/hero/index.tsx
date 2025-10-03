@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {useTranslation} from 'react-i18next';
 import {GridLayout} from 'components/layout';
 import {LanguageSelector} from '../../components/languageSelector';
+import NetworkMenu from '../../components/networkMenu';
 
 function Hero() {
   const {t} = useTranslation();
@@ -14,6 +15,9 @@ function Hero() {
             <Title>{t('explore.hero.title')}</Title>
             <Subtitle>{t('explore.hero.subtitle1')}</Subtitle>
           </ContentWrapper>
+          <NetworkSelectorWrapper>
+            <NetworkMenu variant="explore" />
+          </NetworkSelectorWrapper>
           <LanguageSelectorWrapper>
             <LanguageSelector />
           </LanguageSelectorWrapper>
@@ -50,8 +54,12 @@ const Subtitle = styled.h3.attrs({
     'text-ui-0 ft-text-lg font-normal text-center desktop:text-left leading-3 desktop:leading-3.75',
 })``;
 
+const NetworkSelectorWrapper = styled.div.attrs({
+  className: 'absolute top-1 right-52 desktop:top-1 desktop:right-60',
+})``;
+
 const LanguageSelectorWrapper = styled.div.attrs({
-  className: 'absolute top-3 right-4 desktop:top-5 desktop:right-6',
+  className: 'absolute top-1 right-4 desktop:top-1 desktop:right-6',
 })``;
 
 export default Hero;

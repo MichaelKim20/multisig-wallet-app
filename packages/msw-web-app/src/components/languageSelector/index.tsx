@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useTranslation} from 'react-i18next';
+import styled from 'styled-components';
 
 const languages = [
   {code: 'en', name: 'English'},
@@ -13,37 +14,30 @@ export const LanguageSelector: React.FC = () => {
     i18n.changeLanguage(languageCode);
   };
 
-  const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0];
-
   return (
-    <div style={{ 
-      display: 'flex', 
-      gap: '6px', 
-      alignItems: 'center',
-      background: 'rgba(255, 255, 255, 0.9)',
-      padding: '4px 8px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
-    }}>
+    <LanguageButtonGroup>
       {languages.map(lang => (
-        <button
+        <LanguageButton
           key={lang.code}
+          active={i18n.language === lang.code}
           onClick={() => handleLanguageChange(lang.code)}
-          style={{
-            padding: '4px 8px',
-            fontSize: '12px',
-            background: i18n.language === lang.code ? '#3b82f6' : 'transparent',
-            color: i18n.language === lang.code ? 'white' : '#374151',
-            border: '1px solid #e2e8f0',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontWeight: i18n.language === lang.code ? 'bold' : 'normal',
-            transition: 'all 0.2s ease'
-          }}
         >
           {lang.name}
-        </button>
+        </LanguageButton>
       ))}
-    </div>
+    </LanguageButtonGroup>
   );
 };
+
+const LanguageButtonGroup = styled.div.attrs({
+  className: 'flex gap-0.5 bg-ui-100 backdrop-blur-sm rounded-xl p-1',
+})``;
+
+const LanguageButton = styled.button.attrs({
+  className: 'px-2 py-1 rounded-lg text-sm font-medium transition-all',
+})<{active: boolean}>`
+  ${({active}) =>
+    active
+      ? 'background: white; color: #3164fa; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);'
+      : 'color: #374151; &:hover { background: rgba(255, 255, 255, 0.5); }'}
+`;
